@@ -11,6 +11,12 @@ const App = () => {
 
   return (
     <div className="flex p-6 gap-6">
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-opacity-50 z-40"
+          onClick={toggleSidebar}
+        />
+      )}
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <div className="flex flex-col gap-6">
         <div className="flex items-center gap-3">
