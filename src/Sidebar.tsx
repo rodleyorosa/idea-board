@@ -1,3 +1,5 @@
+import { CloseMenu } from "./assets/CloseMenu";
+
 interface SidebarProps {
   isSidebarOpen: boolean;
   toggleSidebar: () => void;
@@ -7,30 +9,18 @@ export const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
   return (
     <div
       className={`
-        fixed top-0 left-0 h-full w-80 bg-white shadow-lg z-50 
-        transform transition-transform duration-300 ease-in-out
-        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+        fixed lg:static top-0 left-0 h-screen lg:h-auto bg-white shadow-lg z-50 lg:z-auto
+        transform lg:transform-none transition-transform duration-300 ease-in-out min-h-screen
+        w-80 lg:w-64 lg:flex-shrink-0
+        ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }
       `}
     >
-      {/* Header della sidebar */}
       <div className="flex items-center justify-between p-4 border-b">
         <h2 className="text-xl font-semibold">Menu</h2>
-        <button
-          onClick={toggleSidebar}
-          className="p-1 hover:bg-gray-100 rounded"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M18 6L6 18M6 6l12 12"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </button>
+        <CloseMenu onClick={toggleSidebar} />
       </div>
-
-      {/* Contenuto della sidebar */}
       <nav className="p-4">
         <ul className="space-y-3">
           <li>

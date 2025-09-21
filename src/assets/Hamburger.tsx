@@ -1,10 +1,10 @@
 interface HamburgerProps {
-  onClick: React.MouseEventHandler<HTMLButtonElement>
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const Hamburger = ({ onClick }: HamburgerProps): React.JSX.Element => {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} className="cursor-pointer lg:hidden">
       <svg
         width="30px"
         height="30px"
