@@ -9,9 +9,9 @@ export const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
   return (
     <div
       className={`
-        fixed lg:static top-0 left-0 h-screen lg:h-auto bg-white shadow-lg z-50 lg:z-auto
-        transform lg:transform-none transition-transform duration-300 ease-in-out min-h-screen
-        w-80 lg:w-64 lg:flex-shrink-0
+        fixed top-0 left-0 h-screen bg-white shadow-lg z-50
+        transform transition-transform duration-300 ease-in-out
+        w-80 lg:w-64
         ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }

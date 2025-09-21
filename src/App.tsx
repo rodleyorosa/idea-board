@@ -56,7 +56,7 @@ const App = () => {
         />
       )}
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <div className="flex flex-col gap-6 p-6">
+      <div className="flex flex-col gap-6 p-6 lg:ml-64">
         <div className="flex items-center gap-3">
           <Hamburger onClick={toggleSidebar} />
           <h1 className="text-3xl font-bold">Sticky Wall</h1>
