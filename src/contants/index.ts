@@ -1,4 +1,4 @@
-const noteColors = [
+const basicNoteColors = [
   { name: "Giallo", value: "bg-yellow-200", border: "border-yellow-300" },
   { name: "Blu", value: "bg-blue-200", border: "border-blue-300" },
   { name: "Rosa", value: "bg-pink-200", border: "border-pink-300" },

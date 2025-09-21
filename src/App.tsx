@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { Hamburger } from "./assets/Hamburger";
+import { NewNote } from "./NewNote";
 import { Sidebar } from "./Sidebar";
 
 const App = () => {
@@ -11,36 +12,56 @@ const App = () => {
 
   const stickWalls = [
     {
+      id: "add-new", // ID speciale per identificare la carta "aggiungi"
+      type: "add-note", // Tipo speciale
+      title: null,
+      content: null,
+    },
+    {
+      id: 1,
+      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
+      id: 2,
+      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
+      id: 3,
+      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
+      id: 4,
+      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
+      id: 5,
+      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
+      id: 6,
+      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
+      id: 7,
+      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
@@ -62,11 +83,14 @@ const App = () => {
           <h1 className="text-3xl font-bold">Sticky Wall</h1>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {stickWalls.map(({ title, content }) => {
+          {stickWalls.map((item) => {
+            if (item.type === "add-note") {
+              return <NewNote item={item} />;
+            }
             return (
               <div className="bg-pink-100 p-4 rounded-md shadow-md sm:aspect-square">
-                <h3 className="text-lg font-semibold">{title}</h3>
-                <div>{content}</div>
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <div>{item.content}</div>
               </div>
             );
           })}
