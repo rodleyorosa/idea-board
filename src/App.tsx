@@ -12,8 +12,8 @@ const App = () => {
 
   const stickWalls = [
     {
-      id: "add-new", // ID speciale per identificare la carta "aggiungi"
-      type: "add-note", // Tipo speciale
+      id: 0,
+      type: "add-note",
       title: null,
       content: null,
     },
