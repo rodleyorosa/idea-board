@@ -6,6 +6,7 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
+  const items = ["Sticky Wall", "Todo App"];
   return (
     <div
       className={`
@@ -23,46 +24,18 @@ export const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
       </div>
       <nav className="p-4">
         <ul className="space-y-3">
-          <li>
-            <a
-              href="#"
-              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
-            >
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
-            >
-              Note
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
-            >
-              Categorie
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
-            >
-              Impostazioni
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
-            >
-              Aiuto
-            </a>
-          </li>
+          {items.map((item) => {
+            return (
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
+                >
+                  {item}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>
