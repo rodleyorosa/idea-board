@@ -21,7 +21,7 @@ export const CreationNote = ({
     setIsModalOpen(false);
     setTitle("");
     setContent("");
-  }, []);
+  }, [setIsModalOpen]);
 
   const saveNote = () => {
     closeModal();

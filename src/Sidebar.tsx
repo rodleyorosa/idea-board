@@ -1,12 +1,15 @@
+import { NavLink } from "react-router-dom";
 import { CloseMenu } from "./assets/CloseMenu";
+import { useSidebar } from "./hooks/useSidebar";
 
-interface SidebarProps {
-  isSidebarOpen: boolean;
-  toggleSidebar: () => void;
-}
+export const Sidebar = () => {
+  const { isSidebarOpen, closeSidebar } = useSidebar();
 
-export const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
-  const items = ["Sticky Wall", "Todo App"];
+  const items = [
+    { title: "Sticky Wall", path: "/idea-board/sticky-wall" },
+    { title: "Todo App", path: "/idea-board/todo-app" },
+  ];
+
   return (
     <div
       className={`
@@ -18,22 +21,27 @@ export const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
         }
       `}
     >
-      <div className="flex items-center justify-between p-4 border-b">
+      <div className="flex items-center justify-between p-4">
         <h2 className="text-xl font-semibold">Menu</h2>
-        <CloseMenu onClick={toggleSidebar} />
+        <CloseMenu onClick={closeSidebar} />
       </div>
-      <nav className="p-4">
+      <nav className="px-4">
         <ul className="space-y-3">
-          {items.map((item) => {
+          {items.map((item, key) => {
             return (
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
-                >
-                  {item}
-                </a>
-              </li>
+              <NavLink
+                key={key}
+                to={item.path}
+                className={({ isActive }) =>
+                  `block px-4 py-2 rounded transition-colors ${
+                    isActive
+                      ? "bg-gray-100"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`
+                }
+              >
+                {item.title}
+              </NavLink>
             );
           })}
         </ul>
