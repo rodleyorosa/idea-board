@@ -1,3 +1,9 @@
+import { MainContentWrapper } from "../MainContentWrapper";
+
 export const TodoApp = () => {
-  return <div>Todo app</div>;
+  return (
+    <MainContentWrapper title="Todo App">
+      <div></div>
+    </MainContentWrapper>
+  );
 };

@@ -34,11 +34,10 @@ export const Sidebar = () => {
                 to={item.path}
                 className={({ isActive }) =>
                   `block px-4 py-2 rounded transition-colors ${
-                    isActive
-                      ? "bg-gray-100"
-                      : "text-gray-700 hover:bg-gray-100"
+                    isActive ? "bg-gray-100" : "text-gray-700 hover:bg-gray-100"
                   }`
                 }
+                onClick={closeSidebar}
               >
                 {item.title}
               </NavLink>
