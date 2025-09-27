@@ -12,56 +12,43 @@ const App = () => {
 
   const stickWalls = [
     {
-      id: 0,
-      type: "add-note",
-      title: null,
-      content: null,
-    },
-    {
       id: 1,
-      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
       id: 2,
-      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
       id: 3,
-      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
       id: 4,
-      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
       id: 5,
-      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
       id: 6,
-      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
     },
     {
       id: 7,
-      type: "note",
       title: "Social Media",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
@@ -82,11 +69,9 @@ const App = () => {
           <Hamburger onClick={toggleSidebar} />
           <h1 className="text-3xl font-bold">Sticky Wall</h1>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+          <NewNote />
           {stickWalls.map((item) => {
-            if (item.type === "add-note") {
-              return <NewNote item={item} />;
-            }
             return (
               <div className="bg-pink-100 p-4 rounded-md shadow-md sm:aspect-square">
                 <h3 className="text-lg font-semibold">{item.title}</h3>

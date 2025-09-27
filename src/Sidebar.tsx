@@ -10,7 +10,7 @@ export const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
   return (
     <div
       className={`
-        fixed top-0 left-0 h-screen bg-white shadow-lg z-50
+        fixed top-0 left-0 h-screen bg-white shadow-2xl z-50
         transform transition-transform duration-300 ease-in-out
         w-80 lg:w-64
         ${
