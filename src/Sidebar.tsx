@@ -6,8 +6,8 @@ export const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useSidebar();
 
   const items = [
-    { title: "Sticky Wall", path: "/idea-board/sticky-wall" },
-    { title: "Todo App", path: "/idea-board/todo-app" },
+    { title: "Sticky Wall", path: "/sticky-wall" },
+    { title: "Todo App", path: "/todo-app" },
   ];
 
   return (

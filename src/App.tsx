@@ -18,11 +18,11 @@ const App = () => {
       <Sidebar />
       <Routes>
         <Route
-          path="/idea-board"
-          element={<Navigate to="/idea-board/sticky-wall" replace />}
+          path="/"
+          element={<Navigate to="/sticky-wall" replace />}
         />
-        <Route path="/idea-board/sticky-wall" element={<StickyWall />} />
-        <Route path="/idea-board/todo-app" element={<TodoApp />} />
+        <Route path="/sticky-wall" element={<StickyWall />} />
+        <Route path="/todo-app" element={<TodoApp />} />
       </Routes>
     </div>
   );
