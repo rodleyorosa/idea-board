@@ -1,5 +1,5 @@
 import { MainContentWrapper } from "../MainContentWrapper";
-import { NewNote } from "../NewNote";
+import { NewNote } from "./NewNote";
 
 export const StickyWall = () => {
   const stickWalls = [

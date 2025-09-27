@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { useSidebar } from "./hooks/useSidebar";
 import { Sidebar } from "./Sidebar";
 import { StickyWall } from "./sticky-wall/StickyWall";
-import { TodoApp } from "./todo-app/TodoApp";
+import { TodoList } from "./todo-list/TodoList";
 
 const App = () => {
   const { isSidebarOpen, closeSidebar } = useSidebar();
@@ -22,7 +22,7 @@ const App = () => {
           element={<Navigate to="/sticky-wall" replace />}
         />
         <Route path="/sticky-wall" element={<StickyWall />} />
-        <Route path="/todo-app" element={<TodoApp />} />
+        <Route path="/todo-list" element={<TodoList />} />
       </Routes>
     </div>
   );

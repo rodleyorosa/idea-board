@@ -7,7 +7,7 @@ export const Sidebar = () => {
 
   const items = [
     { title: "Sticky Wall", path: "/sticky-wall" },
-    { title: "Todo App", path: "/todo-app" },
+    { title: "Todo List", path: "/todo-list" },
   ];
 
   return (
