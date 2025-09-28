@@ -18,7 +18,7 @@ export const StickyWall = () => {
       id: 2,
       title: "Social Media Marketing Strategy per il 2024",
       content:
-        "Strategia completa per i social media nel 2024:\n\n1. TikTok e Instagram Reels rimangono prioritari\n2. Focus su contenuti video brevi e coinvolgenti\n3. Collaborazioni con micro-influencer\n4. User-generated content campaigns\n5. Analytics e metriche di engagement\n6. Budget allocation: 40% video, 30% static posts, 30% stories\n\nTarget demographics:\n- Gen Z: TikTok, Instagram\n- Millennial: Instagram, LinkedIn\n- Gen X: Facebook, LinkedIn\n\nROI atteso: 15-20% incremento engagement, 25% crescita follower organici.",
+        "Strategia completa per i social media nel 2024:\n\n1. TikTok e Instagram Reels rimangono prioritari\n2. Focus su contenuti video brevi e coinvolgenti\n3. Collaborazioni con micro-influencer\n4. User-generated content campaigns\n5. Analytics e metriche di engagement\n6. Budget allocation: 40% video, 30% static posts, 30% stories\n\nTarget demographics:\n- Gen Z: TikTok, Instagram\n- Millennial: Instagram, LinkedIn\n- Gen X: Facebook, LinkedIn\n\nROI atteso: 15-20% incremento engagement, 25% crescita follower organici.\n\nROI atteso: 15-20% incremento engagement, 25% crescita follower organici.\n\nROI atteso: 15-20% incremento engagement, 25% crescita follower organici.\n\nROI atteso: 15-20% incremento engagement, 25% crescita follower organici.",
     },
     {
       id: 3,
@@ -86,7 +86,7 @@ export const StickyWall = () => {
                   <h3 className="text-lg font-semibold mb-2 truncate">
                     {item.title}
                   </h3>
-                  <div className="text-sm text-gray-700 line-clamp-7">
+                  <div className="text-sm text-gray-700 line-clamp-7 whitespace-pre-wrap">
                     {item.content}
                   </div>
                 </div>
