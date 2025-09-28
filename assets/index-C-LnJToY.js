@@ -82,6 +82,12 @@ Target demographics:
 - Millennial: Instagram, LinkedIn
 - Gen X: Facebook, LinkedIn
 
+ROI atteso: 15-20% incremento engagement, 25% crescita follower organici.
+
+ROI atteso: 15-20% incremento engagement, 25% crescita follower organici.
+
+ROI atteso: 15-20% incremento engagement, 25% crescita follower organici.
+
 ROI atteso: 15-20% incremento engagement, 25% crescita follower organici.`},{id:3,title:"Note Riunione Team - 15 Gennaio",content:`Punti discussi:
 
 • Progetto Q1 2024 - deadline confermata per fine marzo
