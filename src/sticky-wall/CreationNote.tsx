@@ -21,6 +21,8 @@ export const CreationNote = ({
     setIsModalOpen(false);
     setTitle("");
     setContent("");
+    // unblock the scroll when the modal is closed
+    document.body.style.overflow = "unset";
   }, [setIsModalOpen]);
 
   const saveNote = () => {

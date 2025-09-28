@@ -6,6 +6,8 @@ export const NewNote = () => {
 
   const openModal = useCallback(() => {
     setIsModalOpen(true);
+    // block the scroll when the modal is opened
+    document.body.style.overflow = "hidden";
   }, []);
 
   return (
@@ -14,12 +16,12 @@ export const NewNote = () => {
       <div
         onClick={openModal}
         className="
-      bg-white border-2 border-dashed border-gray-300 
-      hover:border-gray-400 hover:bg-gray-50
-      rounded-md shadow-md sm:aspect-square
-      flex items-center justify-center
-      cursor-pointer transition-colors duration-200 pt-2 pb-6
-      "
+          bg-white border-2 border-dashed border-gray-300 
+          hover:border-gray-400 hover:bg-gray-50
+          rounded-md shadow-md sm:aspect-square
+          flex items-center justify-center
+          cursor-pointer transition-colors duration-200 pt-2 pb-6
+        "
       >
         <div className="text-center">
           <div className="text-4xl text-gray-400 mb-2">+</div>
