@@ -11,7 +11,7 @@ export const Note = ({ item, closeNote }: NoteProps) => {
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-5"
       onClick={(e) => e.target === e.currentTarget && closeNote()}
     >
-      <div className="bg-pink-100 rounded-lg shadow-2xl min-w-96 aspect-square max-h-[80vh] overflow-hidden">
+      <div className="bg-pink-100 rounded-lg shadow-2xl min-w-96 aspect-square p-4 max-h-[80vh] overflow-hidden">
         <div className="flex justify-between items-center p-6 border-b border-pink-200">
           <h2 className="text-xl font-bold text-gray-800">{item.title}</h2>
           <button
