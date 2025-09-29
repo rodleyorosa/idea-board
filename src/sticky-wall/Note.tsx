@@ -1,3 +1,4 @@
+import { colorClasses } from "../contants";
 import type { NoteItem } from "../types";
 
 interface NoteProps {
@@ -16,7 +17,11 @@ export const Note = ({ item, closeNote }: NoteProps) => {
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-5"
       onClick={(e) => e.target === e.currentTarget && closeNote()}
     >
-      <div className="bg-pink-100 rounded-lg shadow-2xl w-full max-w-lg sm:max-w-xl lg:max-w-2xl min-h-96 max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col">
+      <div
+        className={`${
+          colorClasses[item.color]
+        } rounded-lg shadow-2xl w-full max-w-lg sm:max-w-xl lg:max-w-2xl min-h-96 max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col`}
+      >
         <div className="flex justify-between items-center p-4 sm:p-6 border-b border-pink-200 flex-shrink-0">
           <h2 className="text-lg sm:text-xl font-bold text-gray-800 truncate pr-4">
             {item.title}

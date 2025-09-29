@@ -22,7 +22,7 @@ export const Sidebar = () => {
       `}
     >
       <div className="flex items-center justify-between p-4">
-        <h2 className="text-xl font-semibold">Menu</h2>
+        <h2 className="text-xl font-semibold">Idea Board</h2>
         <CloseMenu onClick={closeSidebar} />
       </div>
       <nav className="px-4">
