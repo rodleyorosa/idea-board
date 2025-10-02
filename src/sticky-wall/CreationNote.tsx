@@ -34,7 +34,7 @@ export const CreationNote = ({
   const saveNote = useCallback(() => {
     addNote(title, content, color);
     closeModal();
-  }, []);
+  }, [addNote, closeModal, color, content, title]);
 
   if (!isModalOpen) return;
 

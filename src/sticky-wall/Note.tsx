@@ -19,7 +19,7 @@ export const Note = ({ item, closeNote }: NoteProps) => {
   const deleteNoteCallback = useCallback(() => {
     deleteNote(item.id);
     closeNote();
-  }, []);
+  }, [deleteNote, closeNote, item.id]);
 
   return (
     <div
