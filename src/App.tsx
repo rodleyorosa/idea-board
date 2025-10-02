@@ -17,10 +17,7 @@ const App = () => {
       )}
       <Sidebar />
       <Routes>
-        <Route
-          path="/"
-          element={<Navigate to="/sticky-wall" replace />}
-        />
+        <Route path="/" element={<Navigate to="/sticky-wall" replace />} />
         <Route path="/sticky-wall" element={<StickyWall />} />
         <Route path="/todo-list" element={<TodoList />} />
       </Routes>

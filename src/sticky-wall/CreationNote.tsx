@@ -4,6 +4,9 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react";
+import { colors } from "../constants";
+import { useFirebase } from "../hooks/useFirebase";
+import type { NoteColor } from "../types";
 
 interface CreationNoteProps {
   isModalOpen: boolean;
@@ -16,6 +19,9 @@ export const CreationNote = ({
 }: CreationNoteProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [color, setColor] = useState<NoteColor>("yellow");
+
+  const { addNote } = useFirebase();
 
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
@@ -25,9 +31,10 @@ export const CreationNote = ({
     document.body.style.overflow = "unset";
   }, [setIsModalOpen]);
 
-  const saveNote = () => {
+  const saveNote = useCallback(() => {
+    addNote(title, content, color);
     closeModal();
-  };
+  }, []);
 
   if (!isModalOpen) return;
 
@@ -71,11 +78,38 @@ export const CreationNote = ({
               placeholder="Scrivi il contenuto della nota..."
             />
           </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-3">
+              Colore
+            </label>
+            <div className="flex gap-3">
+              {(Object.entries(colors) as [NoteColor, string][]).map(
+                ([colorName, colorClass]) => (
+                  <button
+                    key={colorName}
+                    onClick={() => setColor(colorName)}
+                    className={`w-8 h-8 rounded-full ${colorClass} border-2 transition-transform hover:scale-110 ${
+                      color === colorName
+                        ? "border-slate-800 scale-110"
+                        : "border-slate-300"
+                    }`}
+                  />
+                )
+              )}
+            </div>
+          </div>
         </div>
         <div className="flex gap-3 justify-end mt-8">
           <button
+            onClick={closeModal}
+            className="cursor-pointer px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+          >
+            Annulla
+          </button>
+          <button
             onClick={saveNote}
-            className="cursor-pointer px-6 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors"
+            disabled={!title.trim() && !content.trim()}
+            className="cursor-pointer px-6 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
           >
             Salva Nota
           </button>

@@ -36,7 +36,6 @@ export const TodoDetailModal = ({
           <div className="flex gap-4">
             <div className="flex-1 space-y-4">
               <div className="flex items-start gap-3">
-                {/* <div className="w-5 h-5 border-2 border-gray-300 rounded-full mt-1 flex-shrink-0 hover:border-gray-500 cursor-pointer transition-colors"></div> */}
                 <div className="flex-1">
                   <input
                     type="text"

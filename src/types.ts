@@ -1,11 +1,11 @@
 export type NoteColor = "yellow" | "rose" | "sky" | "emerald" | "violet" | "amber";
 
-
 export type NoteItem = {
-  id: number;
+  id: string;
   title: string;
   content: string;
   color: NoteColor;
+  createdAt: string
 };
 
 export type TodoItemType = {
