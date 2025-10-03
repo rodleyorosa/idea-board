@@ -15,7 +15,7 @@ export const MainContentWrapper = ({
   const { openSidebar } = useSidebar();
 
   return (
-    <div className={`flex flex-col gap-6 p-6 lg:ml-64 w-full ${className}`}>
+    <div className={`flex flex-col gap-6 p-6 lg:ml-64 ${className}`}>
       <div className="flex items-center gap-3">
         <Hamburger onClick={openSidebar} />
         <h1 className="text-3xl font-bold">{title}</h1>

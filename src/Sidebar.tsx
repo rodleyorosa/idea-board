@@ -1,5 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { useCallback } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CloseMenu } from "./assets/CloseMenu";
+import { useAuth } from "./hooks/useAuth";
 import { useSidebar } from "./hooks/useSidebar";
 
 export const Sidebar = () => {
@@ -10,41 +12,76 @@ export const Sidebar = () => {
     { title: "Todo List", path: "/todo-list" },
   ];
 
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = useCallback(async () => {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  }, [logout, navigate]);
+
   return (
     <div
       className={`
         fixed top-0 left-0 h-screen bg-white shadow-2xl z-50
         transform transition-transform duration-300 ease-in-out
-        w-80 lg:w-64
+        w-80 lg:w-64 flex flex-col justify-between
         ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }
       `}
     >
-      <div className="flex items-center justify-between p-4">
-        <h2 className="text-xl font-semibold">Idea Board</h2>
-        <CloseMenu onClick={closeSidebar} />
+      <div className="flex flex-col">
+        <div className="flex items-center justify-between p-4">
+          <h2 className="text-xl font-semibold">Idea Board</h2>
+          <CloseMenu onClick={closeSidebar} />
+        </div>
+        <nav className="px-4">
+          <ul className="space-y-3">
+            <NavLink
+              key={0}
+              to={"/dashboard"}
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded transition-colors ${
+                  isActive ? "bg-gray-100" : "text-gray-700 hover:bg-gray-100"
+                }`
+              }
+              onClick={closeSidebar}
+            >
+              Dashboard
+            </NavLink>
+            <hr />
+            {items.map((item, key) => {
+              return (
+                <NavLink
+                  key={key}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded transition-colors ${
+                      isActive
+                        ? "bg-gray-100"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`
+                  }
+                  onClick={closeSidebar}
+                >
+                  {item.title}
+                </NavLink>
+              );
+            })}
+          </ul>
+        </nav>
       </div>
-      <nav className="px-4">
-        <ul className="space-y-3">
-          {items.map((item, key) => {
-            return (
-              <NavLink
-                key={key}
-                to={item.path}
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded transition-colors ${
-                    isActive ? "bg-gray-100" : "text-gray-700 hover:bg-gray-100"
-                  }`
-                }
-                onClick={closeSidebar}
-              >
-                {item.title}
-              </NavLink>
-            );
-          })}
-        </ul>
-      </nav>
+      <button
+        onClick={handleLogout}  
+        className="cursor-pointer px-4 py-3 m-4 text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-200"
+      >
+        Logout
+      </button>
     </div>
   );
 };

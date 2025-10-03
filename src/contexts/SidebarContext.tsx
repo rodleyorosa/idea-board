@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 import { SidebarContext } from "../hooks/useSidebar";
 
-export const SidebarProvider = ({
-  children,
-}: {
+interface SidebarProviderProps {
   children: React.ReactNode;
-}) => {
+}
+
+export const SidebarProvider = ({ children }: SidebarProviderProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const openSidebar = useCallback(() => {

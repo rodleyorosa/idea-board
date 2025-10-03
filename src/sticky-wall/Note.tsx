@@ -8,11 +8,6 @@ interface NoteProps {
   closeNote: () => void;
 }
 
-interface NoteProps {
-  item: NoteItem;
-  closeNote: () => void;
-}
-
 export const Note = ({ item, closeNote }: NoteProps) => {
   const { deleteNote } = useFirebase();
 
