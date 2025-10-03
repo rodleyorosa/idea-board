@@ -4,32 +4,26 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
-  query,
   serverTimestamp,
-  where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../configuration";
 import type { NoteItem } from "../types";
-import { useAuth } from "./useAuth";
 
-export const useFirebase = () => {
+export const useFirebase = (userId: string | null) => {
   const [notes, setNotes] = useState<NoteItem[]>([]);
-  const { currentUser } = useAuth();
 
   useEffect(() => {
-    if (!currentUser) {
+    if (!userId) {
       setNotes([]);
       return;
     }
 
     try {
-      const notesCollection = collection(db, "notes");
-
-      const q = query(notesCollection, where("userId", "==", currentUser.uid));
+      const notesCollection = collection(db, "users", userId, "notes");
 
       const unsubscribe = onSnapshot(
-        q,
+        notesCollection,
         (snapshot) => {
           const notesData = snapshot.docs.map((doc) => {
             const data = doc.data();
@@ -39,7 +33,6 @@ export const useFirebase = () => {
               content: data.content,
               color: data.color,
               createdAt: data.createdAt,
-              userId: data.userId,
             };
           });
 
@@ -54,20 +47,19 @@ export const useFirebase = () => {
     } catch (err) {
       console.error("Firebase configuration error:", err);
     }
-  }, [currentUser]); // AGGIUNGI currentUser come dipendenza
+  }, [userId]);
 
   const addNote = async (title: string, content: string, color: string) => {
-    if (!currentUser) {
-      throw new Error("You must be authenticated to create a note");
+    if (!userId) {
+      throw new Error("User must be logged in to add notes");
     }
 
     try {
-      const notesCollection = collection(db, "notes");
+      const notesCollection = collection(db, "users", userId, "notes");
       await addDoc(notesCollection, {
         title,
         content,
         color,
-        userId: currentUser.uid,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
@@ -78,6 +70,10 @@ export const useFirebase = () => {
   };
 
   const deleteNote = async (id: string) => {
+    if (!userId) {
+      throw new Error("User must be logged in to delete notes");
+    }
+
     try {
       const noteRef = doc(db, "notes", id);
       await deleteDoc(noteRef);

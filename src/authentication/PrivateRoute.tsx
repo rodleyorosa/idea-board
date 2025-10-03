@@ -6,7 +6,7 @@ interface PrivateRouteProps {
 }
 
 export default function PrivateRoute({ children }: PrivateRouteProps) {
-  const { currentUser } = useAuth();
+  const { user } = useAuth();
 
-  return currentUser ? <>{children}</> : <Navigate to="/login" />;
+  return user ? children : <Navigate to="/login" />;
 }

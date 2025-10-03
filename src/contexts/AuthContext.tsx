@@ -17,7 +17,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const signup = async (email: string, password: string): Promise<void> => {
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+      setUser(user);
       setLoading(false);
     });
 
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   const value: AuthContextType = {
-    currentUser,
+    user,
     signup,
     login,
     loginWithGoogle,

@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { colors } from "../constants";
+import { useAuth } from "../hooks/useAuth";
 import { useFirebase } from "../hooks/useFirebase";
 import type { NoteItem } from "../types";
 
@@ -9,7 +10,8 @@ interface NoteProps {
 }
 
 export const Note = ({ item, closeNote }: NoteProps) => {
-  const { deleteNote } = useFirebase();
+  const { user } = useAuth();
+  const { deleteNote } = useFirebase(user?.uid || null);
 
   const deleteNoteCallback = useCallback(() => {
     deleteNote(item.id);

@@ -2,7 +2,7 @@ import { useAuth } from "../hooks/useAuth";
 import { MainContentWrapper } from "../MainContentWrapper";
 
 export default function Dashboard() {
-  const { currentUser } = useAuth();
+  const { user } = useAuth();
 
   return (
     <MainContentWrapper title="Dashboard">
@@ -60,7 +60,7 @@ export default function Dashboard() {
                   <div>
                     <p className="text-sm font-medium text-gray-500">Email</p>
                     <p className="text-base text-gray-900">
-                      {currentUser?.email}
+                      {user?.email}
                     </p>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ export default function Dashboard() {
                   <div>
                     <p className="text-sm font-medium text-gray-500">User ID</p>
                     <p className="text-base text-gray-900 font-mono text-sm">
-                      {currentUser?.uid}
+                      {user?.uid}
                     </p>
                   </div>
                 </div>
@@ -103,7 +103,7 @@ export default function Dashboard() {
                     <p className="text-sm font-medium text-gray-500">
                       Stato Verifica Email
                     </p>
-                    {currentUser?.emailVerified ? (
+                    {user?.emailVerified ? (
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                         Verificata
                       </span>
@@ -139,7 +139,7 @@ export default function Dashboard() {
                       Provider
                     </p>
                     <p className="text-lg font-semibold text-gray-900">
-                      {currentUser?.providerData[0]?.providerId === "google.com"
+                      {user?.providerData[0]?.providerId === "google.com"
                         ? "Google"
                         : "Email"}
                     </p>

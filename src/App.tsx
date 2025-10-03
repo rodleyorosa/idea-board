@@ -11,7 +11,17 @@ import { TodoList } from "./todo-list/TodoList";
 
 const App = () => {
   const { isSidebarOpen, closeSidebar } = useSidebar();
-  const { currentUser } = useAuth();
+  const { user } = useAuth();
+
+  if (!user) {
+    return (
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    );
+  }
 
   return (
     <div className="flex h-screen">
@@ -21,31 +31,20 @@ const App = () => {
           onClick={closeSidebar}
         />
       )}
-      {currentUser && <Sidebar />}
+      <Sidebar />
       <div className="flex-1">
         <Routes>
-          {!currentUser && (
-            <>
-              <Route path="/" element={<Navigate to="/login" replace />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-            </>
-          )}
-          {currentUser && (
-            <>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/sticky-wall" element={<StickyWall />} />
-              <Route path="/todo-list" element={<TodoList />} />
-              <Route
-                path="/dashboard"
-                element={
-                  <PrivateRoute>
-                    <Dashboard />
-                  </PrivateRoute>
-                }
-              />
-            </>
-          )}
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/sticky-wall" element={<StickyWall />} />
+          <Route path="/todo-list" element={<TodoList />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </div>
     </div>

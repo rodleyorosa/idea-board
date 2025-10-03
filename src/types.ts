@@ -13,7 +13,6 @@ export type NoteItem = {
   title: string;
   content: string;
   color: NoteColor;
-  userId: string;
   createdAt: Timestamp;
   updatedAt?: Timestamp;
 };

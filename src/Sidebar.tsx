@@ -54,7 +54,7 @@ export const Sidebar = () => {
             >
               Dashboard
             </NavLink>
-            <hr />
+            <hr className="text-gray-300"/>
             {items.map((item, key) => {
               return (
                 <NavLink
