@@ -5,12 +5,13 @@ import {
   doc,
   onSnapshot,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../configuration";
 import type { NoteItem } from "../types";
 
-export const useFirebase = (userId: string | null) => {
+export const useNote = (userId: string | null) => {
   const [notes, setNotes] = useState<NoteItem[]>([]);
 
   useEffect(() => {
@@ -69,6 +70,30 @@ export const useFirebase = (userId: string | null) => {
     }
   };
 
+  const editNote = async (
+    id: string,
+    title: string,
+    content: string,
+    color: string
+  ) => {
+    if (!userId) {
+      throw new Error("User must be logged in to update notes");
+    }
+
+    try {
+      const noteRef = doc(db, "users", userId, "notes", id);
+      await updateDoc(noteRef, {
+        title,
+        content,
+        color,
+        updatedAt: serverTimestamp(),
+      });
+    } catch (err) {
+      console.error("Error updating note:", err);
+      throw new Error("Failed to update note: " + (err as Error).message);
+    }
+  };
+
   const deleteNote = async (id: string) => {
     if (!userId) {
       throw new Error("User must be logged in to delete notes");
@@ -83,5 +108,5 @@ export const useFirebase = (userId: string | null) => {
     }
   };
 
-  return { notes, addNote, deleteNote };
+  return { notes, addNote, editNote, deleteNote };
 };

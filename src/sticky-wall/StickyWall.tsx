@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { colors } from "../constants";
 import { useAuth } from "../hooks/useAuth";
-import { useFirebase } from "../hooks/useFirebase";
+import { useNote } from "../hooks/useNote";
 import { MainContentWrapper } from "../MainContentWrapper";
 import type { NoteItem } from "../types";
 import { NewNote } from "./NewNote";
@@ -10,7 +10,7 @@ import { Note } from "./Note";
 export const StickyWall = () => {
   const [selectedNote, setSelectedNote] = useState<NoteItem | null>(null);
   const { user } = useAuth();
-  const { notes } = useFirebase(user?.uid || null);
+  const { notes } = useNote(user?.uid || null);
 
   const openNote = useCallback((item: NoteItem) => {
     setSelectedNote(item);

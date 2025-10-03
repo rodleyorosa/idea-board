@@ -6,7 +6,7 @@ import {
 } from "react";
 import { colors } from "../constants";
 import { useAuth } from "../hooks/useAuth";
-import { useFirebase } from "../hooks/useFirebase";
+import { useNote } from "../hooks/useNote";
 import type { NoteColor } from "../types";
 
 interface CreationNoteProps {
@@ -23,7 +23,7 @@ export const CreationNote = ({
   const [color, setColor] = useState<NoteColor>("yellow");
 
   const { user } = useAuth();
-  const { addNote } = useFirebase(user?.uid || null);
+  const { addNote } = useNote(user?.uid || null);
 
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
