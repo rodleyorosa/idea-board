@@ -41,7 +41,7 @@ export const Note = ({ item, closeNote }: NoteProps) => {
     >
       <div
         onDoubleClick={() => setIsEditing(true)}
-        className={`${colors[color]} rounded-lg shadow-2xl w-full max-w-lg sm:max-w-xl lg:max-w-2xl min-h-96 max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col relative`}
+        className={`${colors[color]} rounded-lg shadow-2xl w-full max-w-lg sm:max-w-xl lg:max-w-2xl min-h-96 max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col`}
       >
         <div className="flex justify-between items-center p-4 sm:p-6 flex-shrink-0">
           {isEditing ? (
@@ -59,7 +59,7 @@ export const Note = ({ item, closeNote }: NoteProps) => {
           )}
           <button
             onClick={closeNote}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 text-xl cursor-pointer transition-colors flex-shrink-0"
+            className="w-8 h-8 rounded-full text-gray-500 text-xl cursor-pointer"
           >
             ×
           </button>
@@ -79,7 +79,7 @@ export const Note = ({ item, closeNote }: NoteProps) => {
           )}
         </div>
         <div
-          className={`p-4 sm:p-6 flex flex-col md:flex-row md:${
+          className={`p-4 sm:p-6 flex flex-col md:flex-row ${
             isEditing ? "justify-between" : "justify-end"
           } md:items-center gap-4`}
         >

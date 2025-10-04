@@ -4,6 +4,8 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
+  orderBy,
+  query,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
@@ -23,8 +25,10 @@ export const useNote = (userId: string | null) => {
     try {
       const notesCollection = collection(db, "users", userId, "notes");
 
+      const notesQuery = query(notesCollection, orderBy("createdAt", "desc"));
+
       const unsubscribe = onSnapshot(
-        notesCollection,
+        notesQuery,
         (snapshot) => {
           const notesData = snapshot.docs.map((doc) => {
             const data = doc.data();
@@ -100,7 +104,7 @@ export const useNote = (userId: string | null) => {
     }
 
     try {
-      const noteRef = doc(db, "notes", id);
+      const noteRef = doc(db, "users", userId, "notes", id);
       await deleteDoc(noteRef);
     } catch (err) {
       console.error("Error deleting note:", err);
