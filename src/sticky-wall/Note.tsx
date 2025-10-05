@@ -41,7 +41,11 @@ export const Note = ({ item, closeNote }: NoteProps) => {
     >
       <div
         onDoubleClick={() => setIsEditing(true)}
-        className={`${colors[color]} rounded-lg shadow-2xl h-full w-full max-w-lg sm:max-w-xl lg:max-w-2xl min-h-96 max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col ${isEditing ? 'p-4' : 'p-8'} gap-4`}
+        className={`${
+          colors[color]
+        } rounded-lg shadow-2xl h-full w-full max-w-lg sm:max-w-xl lg:max-w-2xl min-h-96 max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col ${
+          isEditing ? "p-4" : "p-8"
+        } gap-4`}
       >
         <div className="flex justify-between items-center flex-shrink-0">
           {isEditing ? (

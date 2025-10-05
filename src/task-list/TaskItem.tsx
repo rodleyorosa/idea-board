@@ -1,22 +1,22 @@
 import { useCallback, useState } from "react";
-import { useTodoList } from "../hooks/useTodoList";
-import type { TaskItem } from "../types";
+import { useTask } from "../hooks/useTask";
 import { getPriorityConfig, getStatusColor } from "../utils";
-import { TodoDetailModal } from "./TodoDetailModal";
+import { TaskDetailModal } from "./TaskDetailModal";
+import type { TaskItemType } from "../types";
 
-interface TodoItemProps {
-  task: TaskItem;
+interface TaskItemProps {
+  task: TaskItemType;
 }
 
-export const TodoItem = ({ task }: TodoItemProps) => {
-  const [isTodoDetailModalOpened, setIsTodoDetailModalOpened] = useState(false);
+export const TaskItem = ({ task }: TaskItemProps) => {
+  const [isModalOpened, setIsModalOpened] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const { deleteTask } = useTodoList();
+  const { deleteTask } = useTask();
 
   const priorityConfig = getPriorityConfig(task.priority);
 
-  const openTodoDetailModal = useCallback(() => {
-    setIsTodoDetailModalOpened(true);
+  const openModal = useCallback(() => {
+    setIsModalOpened(true);
     // block the scroll when the modal is opened
     document.body.style.overflow = "hidden";
   }, []);
@@ -40,13 +40,13 @@ export const TodoItem = ({ task }: TodoItemProps) => {
 
   return (
     <>
-      <TodoDetailModal
+      <TaskDetailModal
         task={task}
-        isTodoDetailModalOpened={isTodoDetailModalOpened}
-        setIsTodoDetailModalOpened={setIsTodoDetailModalOpened}
+        isTaskDetailModalOpened={isModalOpened}
+        setIsTaskDetailModalOpened={setIsModalOpened}
       />
       <div
-        onClick={openTodoDetailModal}
+        onClick={openModal}
         className="group bg-white border border-gray-200 hover:border-indigo-300 rounded-xl p-4 hover:shadow-lg transition-all duration-300 cursor-pointer relative"
       >
         <div className="flex gap-4 items-start">
@@ -71,7 +71,7 @@ export const TodoItem = ({ task }: TodoItemProps) => {
                 </span>
                 <button
                   onClick={handleDelete}
-                  className={`p-1.5 rounded-lg transition-all duration-200 ${
+                  className={`p-1.5 rounded-lg transition-all duration-200 cursor-pointer ${
                     showDeleteConfirm
                       ? "bg-red-500 text-white hover:bg-red-600"
                       : "text-gray-400 hover:text-red-500 hover:bg-red-50"

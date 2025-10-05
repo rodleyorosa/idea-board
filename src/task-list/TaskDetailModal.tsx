@@ -5,8 +5,8 @@ import {
   type SetStateAction,
 } from "react";
 import { priorityConfig, statusConfig } from "../constants";
-import { useTodoList } from "../hooks/useTodoList";
-import type { TaskItem } from "../types";
+import { useTask } from "../hooks/useTask";
+import type { TaskItemType } from "../types";
 import {
   getStatusColor,
   getStatusIconColor,
@@ -14,25 +14,25 @@ import {
 } from "../utils";
 import { formatTimestamp } from "../utils/dateUtils";
 
-interface TodoDetailModalProps {
-  task: TaskItem;
-  isTodoDetailModalOpened: boolean;
-  setIsTodoDetailModalOpened: Dispatch<SetStateAction<boolean>>;
+interface TaskDetailModalProps {
+  task: TaskItemType;
+  isTaskDetailModalOpened: boolean;
+  setIsTaskDetailModalOpened: Dispatch<SetStateAction<boolean>>;
 }
 
-export const TodoDetailModal = ({
+export const TaskDetailModal = ({
   task,
-  isTodoDetailModalOpened,
-  setIsTodoDetailModalOpened,
-}: TodoDetailModalProps) => {
+  isTaskDetailModalOpened,
+  setIsTaskDetailModalOpened,
+}: TaskDetailModalProps) => {
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
   const [status, setStatus] = useState(task.status);
   const [priority, setPriority] = useState(task.priority);
-  const { editTask } = useTodoList();
+  const { editTask } = useTask();
 
-  const closeTodoDetailModal = useCallback(() => {
-    setIsTodoDetailModalOpened(false);
+  const closeModal = useCallback(() => {
+    setIsTaskDetailModalOpened(false);
     setTitle(task.title);
     setDescription(task.description);
     setStatus(task.status);
@@ -40,7 +40,7 @@ export const TodoDetailModal = ({
     // unblock the scroll when the modal is closed
     document.body.style.overflow = "unset";
   }, [
-    setIsTodoDetailModalOpened,
+    setIsTaskDetailModalOpened,
     setTitle,
     setDescription,
     setStatus,
@@ -50,23 +50,15 @@ export const TodoDetailModal = ({
 
   const updateTask = useCallback(() => {
     editTask(task.id, title, description, status, priority);
-    closeTodoDetailModal();
-  }, [
-    editTask,
-    task,
-    title,
-    description,
-    status,
-    priority,
-    closeTodoDetailModal,
-  ]);
+    closeModal();
+  }, [editTask, task, title, description, status, priority, closeModal]);
 
-  if (!isTodoDetailModalOpened) return;
+  if (!isTaskDetailModalOpened) return;
 
   return (
     <div
       className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn"
-      onClick={(e) => e.target === e.currentTarget && closeTodoDetailModal()}
+      onClick={(e) => e.target === e.currentTarget && closeModal()}
     >
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-hidden transform transition-all animate-slideUp">
         {/* Header */}
@@ -104,7 +96,7 @@ export const TodoDetailModal = ({
               </div>
             </div>
             <button
-              onClick={closeTodoDetailModal}
+              onClick={closeModal}
               className="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-200 cursor-pointer"
             >
               <svg
@@ -308,7 +300,7 @@ export const TodoDetailModal = ({
                 disabled={!title.trim()}
                 className="px-6 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-600 hover:to-purple-700 shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none flex items-center gap-2"
               >
-                Aggiorna attività
+                Aggiorna
               </button>
             </div>
           </div>

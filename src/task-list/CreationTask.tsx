@@ -1,12 +1,13 @@
 import {
   useCallback,
+  useMemo,
   useState,
   type Dispatch,
   type SetStateAction,
 } from "react";
-import { useTodoList } from "../hooks/useTodoList";
-import type { TaskPriority } from "../types";
 import { priorityConfig } from "../constants";
+import { useTask } from "../hooks/useTask";
+import type { TaskPriority } from "../types";
 
 interface CreationTaskProps {
   isModalOpen: boolean;
@@ -20,7 +21,11 @@ export const CreationTask = ({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<TaskPriority>("media");
-  const { addTask } = useTodoList();
+  const { addTask } = useTask();
+
+  const isCreateButtonDisabled = useMemo(() => {
+    return !title.trim();
+  }, [title]);
 
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
@@ -73,6 +78,7 @@ export const CreationTask = ({
             </div>
             <button
               onClick={closeModal}
+              title="Chiudi"
               className="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-200 cursor-pointer"
             >
               <svg
@@ -195,14 +201,9 @@ export const CreationTask = ({
         <div className="p-6 bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200">
           <div className="flex items-center justify-end gap-3">
             <button
-              onClick={closeModal}
-              className="px-6 py-2.5 bg-white text-gray-700 font-semibold rounded-xl hover:bg-gray-100 border-2 border-gray-200 transition-all duration-200 cursor-pointer"
-            >
-              Annulla
-            </button>
-            <button
               onClick={saveTask}
-              disabled={!title.trim()}
+              disabled={isCreateButtonDisabled}
+              title={isCreateButtonDisabled ? 'Aggiungi titolo' : 'Crea'}
               className="px-6 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-600 hover:to-purple-700 shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none flex items-center gap-2"
             >
               <svg
@@ -218,7 +219,7 @@ export const CreationTask = ({
                   d="M12 4v16m8-8H4"
                 />
               </svg>
-              Crea Attività
+              Crea
             </button>
           </div>
         </div>

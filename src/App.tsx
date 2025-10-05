@@ -7,7 +7,7 @@ import { useAuth } from "./hooks/useAuth";
 import { useSidebar } from "./hooks/useSidebar";
 import { Sidebar } from "./Sidebar";
 import { StickyWall } from "./sticky-wall/StickyWall";
-import { TodoList } from "./todo-list/TodoList";
+import { TaskList } from "./task-list/TaskList";
 
 const App = () => {
   const { isSidebarOpen, closeSidebar } = useSidebar();
@@ -36,7 +36,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/sticky-wall" element={<StickyWall />} />
-          <Route path="/todo-list" element={<TodoList />} />
+          <Route path="/task-list" element={<TaskList />} />
           <Route
             path="/dashboard"
             element={

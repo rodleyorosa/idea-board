@@ -9,7 +9,7 @@ export const Sidebar = () => {
 
   const items = [
     { title: "Sticky Wall", path: "/sticky-wall" },
-    { title: "Todo List", path: "/todo-list" },
+    { title: "Task List", path: "/task-list" },
   ];
 
   const { logout } = useAuth();

@@ -11,11 +11,11 @@ import {
 } from "firebase/firestore";
 import { useEffect, useMemo, useState } from "react";
 import { db } from "../configuration";
-import type { TaskItem, TaskPriority, TaskStatus } from "../types";
+import type { TaskItemType, TaskPriority, TaskStatus } from "../types";
 import { useAuth } from "./useAuth";
 
-export const useTodoList = () => {
-  const [tasks, setTasks] = useState<TaskItem[]>([]);
+export const useTask = () => {
+  const [tasks, setTasks] = useState<TaskItemType[]>([]);
   const { user } = useAuth();
 
   const userId = useMemo(() => {

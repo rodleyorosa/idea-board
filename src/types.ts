@@ -20,7 +20,7 @@ export type NoteItem = {
 export type TaskStatus = "open" | "in-progress" | "done";
 export type TaskPriority = "bassa" | "media" | "alta";
 
-export type TaskItem = {
+export type TaskItemType = {
   id: string;
   title: string;
   description: string;

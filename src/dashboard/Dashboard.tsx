@@ -1,13 +1,14 @@
 import { useMemo } from "react";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useNote } from "../hooks/useNote";
-import { useTodoList } from "../hooks/useTodoList";
+import { useTask } from "../hooks/useTask";
 import { MainContentWrapper } from "../MainContentWrapper";
 
 export default function Dashboard() {
   const { user } = useAuth();
   const { notes } = useNote(user?.uid || null);
-  const { tasks } = useTodoList();
+  const { tasks } = useTask();
 
   const noteLengthText = useMemo(() => {
     return `${notes.length} ${notes.length === 1 ? `nota` : `note`}`;
@@ -96,39 +97,13 @@ export default function Dashboard() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <svg
-                    className="w-5 h-5 text-gray-400 mt-0.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500">
-                      Stato Verifica Email
-                    </p>
-                    {user?.emailVerified ? (
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        Verificata
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                        Non Verificata
-                      </span>
-                    )}
-                  </div>
-                </div>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-              <div className="bg-white rounded-xl shadow-md p-6">
+              <NavLink
+                className="bg-white rounded-xl shadow-md p-6"
+                to={"/sticky-wall"}
+              >
                 <div className="flex items-center">
                   <div className="flex-shrink-0 bg-blue-100 rounded-lg p-3">
                     <svg
@@ -154,8 +129,11 @@ export default function Dashboard() {
                     </p>
                   </div>
                 </div>
-              </div>
-              <div className="bg-white rounded-xl shadow-md p-6">
+              </NavLink>
+              <NavLink
+                className="bg-white rounded-xl shadow-md p-6"
+                to={"/task-list"}
+              >
                 <div className="flex items-center">
                   <div className="flex-shrink-0 bg-green-100 rounded-lg p-3">
                     <svg
@@ -174,14 +152,14 @@ export default function Dashboard() {
                   </div>
                   <div className="ml-4">
                     <p className="text-sm font-medium text-gray-500">
-                      Todo List
+                      Task List
                     </p>
                     <p className="text-lg font-semibold text-gray-900">
                       {taskLengthText}
                     </p>
                   </div>
                 </div>
-              </div>
+              </NavLink>
             </div>
           </div>
         </main>
