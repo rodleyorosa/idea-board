@@ -36,14 +36,14 @@ export const Note = ({ item, closeNote }: NoteProps) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-5"
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn"
       onClick={(e) => e.target === e.currentTarget && closeNote()}
     >
       <div
         onDoubleClick={() => setIsEditing(true)}
-        className={`${colors[color]} rounded-lg shadow-2xl w-full max-w-lg sm:max-w-xl lg:max-w-2xl min-h-96 max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col`}
+        className={`${colors[color]} rounded-lg shadow-2xl h-full w-full max-w-lg sm:max-w-xl lg:max-w-2xl min-h-96 max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col ${isEditing ? 'p-4' : 'p-8'} gap-4`}
       >
-        <div className="flex justify-between items-center p-4 sm:p-6 flex-shrink-0">
+        <div className="flex justify-between items-center flex-shrink-0">
           {isEditing ? (
             <input
               type="text"
@@ -64,7 +64,7 @@ export const Note = ({ item, closeNote }: NoteProps) => {
             ×
           </button>
         </div>
-        <div className="p-4 sm:p-6 overflow-y-auto flex-1">
+        <div className="overflow-y-auto h-full">
           {isEditing ? (
             <textarea
               value={content}
@@ -79,7 +79,7 @@ export const Note = ({ item, closeNote }: NoteProps) => {
           )}
         </div>
         <div
-          className={`p-4 sm:p-6 flex flex-col md:flex-row ${
+          className={`flex flex-col md:flex-row ${
             isEditing ? "justify-between" : "justify-end"
           } md:items-center gap-4`}
         >

@@ -1,15 +1,19 @@
 import { useCallback, useState } from "react";
-import { Checkbox } from "../assets/Checkbox";
-import type { TodoItemType } from "../types";
+import { useTodoList } from "../hooks/useTodoList";
+import type { TaskItem } from "../types";
+import { getPriorityConfig, getStatusColor } from "../utils";
 import { TodoDetailModal } from "./TodoDetailModal";
 
 interface TodoItemProps {
-  key: React.Key;
-  todo: TodoItemType;
+  task: TaskItem;
 }
 
-export const TodoItem = ({ key, todo }: TodoItemProps) => {
+export const TodoItem = ({ task }: TodoItemProps) => {
   const [isTodoDetailModalOpened, setIsTodoDetailModalOpened] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const { deleteTask } = useTodoList();
+
+  const priorityConfig = getPriorityConfig(task.priority);
 
   const openTodoDetailModal = useCallback(() => {
     setIsTodoDetailModalOpened(true);
@@ -17,31 +21,116 @@ export const TodoItem = ({ key, todo }: TodoItemProps) => {
     document.body.style.overflow = "hidden";
   }, []);
 
-  const closeTodoDetailModal = useCallback(() => {
-    setIsTodoDetailModalOpened(false);
-    // unblock the scroll when the modal is closed
-    document.body.style.overflow = "unset";
-  }, []);
+  const handleDelete = useCallback(
+    async (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (showDeleteConfirm) {
+        try {
+          await deleteTask(task.id);
+        } catch (error) {
+          console.error("Error deleting task:", error);
+        }
+      } else {
+        setShowDeleteConfirm(true);
+        setTimeout(() => setShowDeleteConfirm(false), 3000);
+      }
+    },
+    [deleteTask, task.id, showDeleteConfirm]
+  );
 
   return (
     <>
       <TodoDetailModal
-        title={todo.title}
-        description={todo.description}
+        task={task}
         isTodoDetailModalOpened={isTodoDetailModalOpened}
-        closeTodoDetailModal={closeTodoDetailModal}
+        setIsTodoDetailModalOpened={setIsTodoDetailModalOpened}
       />
       <div
-        key={key}
         onClick={openTodoDetailModal}
-        className="border-b border-gray-200 pb-2 hover:bg-gray-50 px-2 py-2 rounded transition-colors duration-200 cursor-pointer"
+        className="group bg-white border border-gray-200 hover:border-indigo-300 rounded-xl p-4 hover:shadow-lg transition-all duration-300 cursor-pointer relative"
       >
-        <div className="flex gap-3 items-start">
-          <Checkbox />
-          <div className="flex flex-col leading-none gap-1 flex-1">
-            <p className="text-gray-900 font-medium">{todo.title}</p>
-            <p className="text-sm text-gray-500">{todo.description}</p>
+        <div className="flex gap-4 items-start">
+          <div
+            className={`w-7 h-7 rounded-lg border flex items-center justify-center flex-shrink-0 font-semibold text-sm ${priorityConfig.color}`}
+            title={`Priorità ${priorityConfig.label}`}
+          >
+            {priorityConfig.icon}
           </div>
+          <div className="flex flex-col gap-2 flex-1 min-w-0">
+            <div className="flex items-start justify-between gap-3">
+              <h3 className="text-base font-semibold text-gray-800 group-hover:text-indigo-700 transition-colors duration-300">
+                {task.title}
+              </h3>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <span
+                  className={`px-2.5 py-1 text-xs font-medium rounded-full border ${getStatusColor(
+                    task.status
+                  )}`}
+                >
+                  {task.status}
+                </span>
+                <button
+                  onClick={handleDelete}
+                  className={`p-1.5 rounded-lg transition-all duration-200 ${
+                    showDeleteConfirm
+                      ? "bg-red-500 text-white hover:bg-red-600"
+                      : "text-gray-400 hover:text-red-500 hover:bg-red-50"
+                  }`}
+                  title={
+                    showDeleteConfirm ? "Clicca per confermare" : "Elimina task"
+                  }
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+              {task.description}
+            </p>
+            <div className="flex items-center gap-4 mt-1">
+              <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>Nessuna scadenza</span>
+              </div>
+            </div>
+          </div>
+          <svg
+            className="w-5 h-5 text-gray-400 group-hover:text-indigo-500 transition-all duration-300 group-hover:translate-x-1 flex-shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
         </div>
       </div>
     </>

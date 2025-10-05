@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Dashboard from "./authentication/Dashboard";
 import Login from "./authentication/Login";
 import PrivateRoute from "./authentication/PrivateRoute";
 import Signup from "./authentication/Signup";
+import Dashboard from "./dashboard/Dashboard";
 import { useAuth } from "./hooks/useAuth";
 import { useSidebar } from "./hooks/useSidebar";
 import { Sidebar } from "./Sidebar";
@@ -27,7 +27,7 @@ const App = () => {
     <div className="flex h-screen">
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn"
           onClick={closeSidebar}
         />
       )}

@@ -38,6 +38,7 @@ export const useNote = (userId: string | null) => {
               content: data.content,
               color: data.color,
               createdAt: data.createdAt,
+              updatedAt: data.updatedAt,
             };
           });
 
@@ -66,7 +67,7 @@ export const useNote = (userId: string | null) => {
         content,
         color,
         createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
+        updatedAt: null,
       });
     } catch (err) {
       console.error("Error adding note:", err);

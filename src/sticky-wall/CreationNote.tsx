@@ -43,13 +43,13 @@ export const CreationNote = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-5"
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn"
       onClick={(e) => e.target === e.currentTarget && closeModal()}
     >
       <div
-        className={`${colors[color]} rounded-lg shadow-2xl w-full max-w-lg sm:max-w-xl lg:max-w-2xl min-h-96 max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col`}
+        className={`${colors[color]} rounded-lg shadow-2xl w-full max-w-lg sm:max-w-xl lg:max-w-2xl min-h-96 max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col p-4 gap-4`}
       >
-        <div className="flex justify-between items-center p-4 sm:p-6 flex-shrink-0">
+        <div className="flex justify-between items-center flex-shrink-0">
           <input
             type="text"
             value={title}
@@ -64,7 +64,7 @@ export const CreationNote = ({
             ×
           </button>
         </div>
-        <div className="p-4 sm:p-6 overflow-y-auto flex-1">
+        <div className="overflow-y-auto">
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -73,7 +73,7 @@ export const CreationNote = ({
             placeholder="Scrivi il contenuto della nota..."
           />
         </div>
-        <div className="p-4 sm:p-6 flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
           <div className="flex gap-3">
             {(Object.entries(colors) as [NoteColor, string][]).map(
               ([colorName, colorClass]) => (

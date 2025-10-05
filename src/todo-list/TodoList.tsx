@@ -1,90 +1,25 @@
+import { useCallback, useState } from "react";
+import { useTodoList } from "../hooks/useTodoList";
 import { MainContentWrapper } from "../MainContentWrapper";
-import type { TodoItemType } from "../types";
+import { CreationTask } from "./CreationTask";
+import { NewTask } from "./NewTask";
 import { TodoItem } from "./TodoItem";
 
 export const TodoList = () => {
-  const todoList: TodoItemType[] = [
-    {
-      title: "title",
-      description: "description",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-    {
-      title: "title",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu",
-    },
-  ];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { tasks } = useTodoList();
+
+  const openCreateTask = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
 
   return (
     <MainContentWrapper title="Todo List" className="lg:w-2/3">
+      <CreationTask isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <NewTask openCreateTask={openCreateTask} />
       <div className="flex flex-col gap-4">
-        {todoList.map((todo, key) => {
-          return <TodoItem key={key} todo={todo} />;
+        {tasks.map((task) => {
+          return <TodoItem key={task.id} task={task} />;
         })}
       </div>
     </MainContentWrapper>

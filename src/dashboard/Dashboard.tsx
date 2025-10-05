@@ -1,8 +1,21 @@
+import { useMemo } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { useNote } from "../hooks/useNote";
+import { useTodoList } from "../hooks/useTodoList";
 import { MainContentWrapper } from "../MainContentWrapper";
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const { notes } = useNote(user?.uid || null);
+  const { tasks } = useTodoList();
+
+  const noteLengthText = useMemo(() => {
+    return `${notes.length} ${notes.length === 1 ? `nota` : `note`}`;
+  }, [notes]);
+
+  const taskLengthText = useMemo(() => {
+    return `${tasks.length} ${tasks.length === 1 ? `task` : `tasks`}`;
+  }, [tasks]);
 
   return (
     <MainContentWrapper title="Dashboard">
@@ -59,9 +72,7 @@ export default function Dashboard() {
                   </svg>
                   <div>
                     <p className="text-sm font-medium text-gray-500">Email</p>
-                    <p className="text-base text-gray-900">
-                      {user?.email}
-                    </p>
+                    <p className="text-base text-gray-900">{user?.email}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
@@ -136,12 +147,10 @@ export default function Dashboard() {
                   </div>
                   <div className="ml-4">
                     <p className="text-sm font-medium text-gray-500">
-                      Provider
+                      Sticky Wall
                     </p>
                     <p className="text-lg font-semibold text-gray-900">
-                      {user?.providerData[0]?.providerId === "google.com"
-                        ? "Google"
-                        : "Email"}
+                      {noteLengthText}
                     </p>
                   </div>
                 </div>
@@ -164,36 +173,11 @@ export default function Dashboard() {
                     </svg>
                   </div>
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-500">Account</p>
-                    <p className="text-lg font-semibold text-gray-900">
-                      Attivo
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white rounded-xl shadow-md p-6">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0 bg-purple-100 rounded-lg p-3">
-                    <svg
-                      className="w-6 h-6 text-purple-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                      />
-                    </svg>
-                  </div>
-                  <div className="ml-4">
                     <p className="text-sm font-medium text-gray-500">
-                      Sicurezza
+                      Todo List
                     </p>
                     <p className="text-lg font-semibold text-gray-900">
-                      Protetto
+                      {taskLengthText}
                     </p>
                   </div>
                 </div>

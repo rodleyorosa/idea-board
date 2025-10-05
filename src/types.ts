@@ -14,10 +14,18 @@ export type NoteItem = {
   content: string;
   color: NoteColor;
   createdAt: Timestamp;
-  updatedAt?: Timestamp;
+  updatedAt: Timestamp | null;
 };
 
-export type TodoItemType = {
+export type TaskStatus = "open" | "in-progress" | "done";
+export type TaskPriority = "bassa" | "media" | "alta";
+
+export type TaskItem = {
+  id: string;
   title: string;
   description: string;
+  status: TaskStatus;
+  priority: TaskPriority;
+  createdAt: Timestamp;
+  updatedAt: Timestamp | null;
 };
