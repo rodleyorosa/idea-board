@@ -7,6 +7,7 @@ import { useAuth } from "./hooks/useAuth";
 import { useSidebar } from "./hooks/useSidebar";
 import { Sidebar } from "./Sidebar";
 import { StickyWall } from "./sticky-wall/StickyWall";
+import { TaskDetail } from "./task-list/TaskDetail";
 import { TaskList } from "./task-list/TaskList";
 
 const App = () => {
@@ -37,6 +38,14 @@ const App = () => {
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/sticky-wall" element={<StickyWall />} />
           <Route path="/task-list" element={<TaskList />} />
+          <Route
+            path="/task/:taskId"
+            element={
+              <PrivateRoute>
+                <TaskDetail />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/dashboard"
             element={
