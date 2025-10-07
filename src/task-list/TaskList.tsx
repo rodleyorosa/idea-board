@@ -37,10 +37,16 @@ export const TaskList = () => {
     // Applica ordinamento
     result.sort((a, b) => {
       switch (sortBy) {
-        case "date-desc":
-          return b.createdAt.toMillis() - a.createdAt.toMillis();
-        case "date-asc":
-          return a.createdAt.toMillis() - b.createdAt.toMillis();
+        case "date-desc": {
+          const aTime = a.createdAt?.toMillis() ?? 0;
+          const bTime = b.createdAt?.toMillis() ?? 0;
+          return bTime - aTime;
+        }
+        case "date-asc": {
+          const aTime = a.createdAt?.toMillis() ?? 0;
+          const bTime = b.createdAt?.toMillis() ?? 0;
+          return aTime - bTime;
+        }
         case "priority": {
           const priorityOrder = { alta: 0, media: 1, bassa: 2 };
           return priorityOrder[a.priority] - priorityOrder[b.priority];
