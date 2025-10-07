@@ -75,7 +75,7 @@ export const TaskDetail = () => {
 
   if (!task) {
     return (
-      <MainContentWrapper title="Task non trovato">
+      <MainContentWrapper title="Task non trovato" className="lg:w-2/3">
         <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg
@@ -110,8 +110,12 @@ export const TaskDetail = () => {
   }
 
   return (
-    <MainContentWrapper title="Dettaglio Task" fullscreenMobile>
-      <div className="bg-white sm:rounded-2xl shadow-xl overflow-hidden h-full flex flex-col">
+    <MainContentWrapper
+      title="Dettaglio Task"
+      className="lg:w-2/3"
+      fullscreenMobile
+    >
+      <div className="bg-white sm:rounded-2xl shadow-xl overflow-hidden flex flex-col">
         {/* Header */}
         <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
           {/* Desktop: bottoni in alto */}
@@ -342,8 +346,8 @@ export const TaskDetail = () => {
         </div>
 
         {/* Content */}
-        <div className="p-4 sm:p-6 flex-1 overflow-y-auto bg-white">
-          <div className="space-y-6 max-w-4xl mx-auto">
+        <div className="p-6 flex-1 overflow-y-auto bg-white">
+          <div className="space-y-6">
             {/* Titolo */}
             <div className="group">
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
@@ -418,8 +422,8 @@ export const TaskDetail = () => {
         </div>
 
         {/* Footer */}
-        <div className="p-4 sm:p-6 bg-gray-50 border-t border-gray-200 flex-shrink-0">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 max-w-4xl mx-auto">
+        <div className="p-6 bg-gray-50 border-t border-gray-200 flex-shrink-0">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <svg
                 className="w-4 h-4"

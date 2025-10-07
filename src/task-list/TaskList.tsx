@@ -1,9 +1,8 @@
 import { useCallback, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTask } from "../hooks/useTask";
 import { MainContentWrapper } from "../MainContentWrapper";
 import type { TaskPriority, TaskStatus } from "../types";
-import { CreationTask } from "./CreationTask";
-import { NewTask } from "./NewTask";
 import { TaskItem } from "./TaskItem";
 
 type SortType = "date-desc" | "date-asc" | "priority" | "status";
@@ -11,21 +10,19 @@ type FilterPriority = TaskPriority | "all";
 type FilterStatus = TaskStatus | "all";
 
 export const TaskList = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [sortBy, setSortBy] = useState<SortType>("date-desc");
   const [filterPriority, setFilterPriority] = useState<FilterPriority>("all");
   const [filterStatus, setFilterStatus] = useState<FilterStatus>("all");
   const { tasks } = useTask();
+  const navigate = useNavigate();
 
   const openCreateTask = useCallback(() => {
-    setIsModalOpen(true);
-  }, []);
+    navigate("/task/create");
+  }, [navigate]);
 
-  // Filtra e ordina i task
   const filteredAndSortedTasks = useMemo(() => {
     let result = [...tasks];
 
-    // Applica filtri
     if (filterPriority !== "all") {
       result = result.filter((task) => task.priority === filterPriority);
     }
@@ -34,7 +31,6 @@ export const TaskList = () => {
       result = result.filter((task) => task.status === filterStatus);
     }
 
-    // Applica ordinamento
     result.sort((a, b) => {
       switch (sortBy) {
         case "date-desc": {
@@ -86,11 +82,8 @@ export const TaskList = () => {
 
   return (
     <MainContentWrapper title="Task List" className="lg:w-2/3">
-      <CreationTask isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-
       {/* Barra filtri e ordinamento */}
       <div className="bg-white rounded-xl p-4 shadow-md border border-gray-200 space-y-4">
-        {/* Titolo sezione */}
         <div className="flex items-center gap-2 pb-3 border-b border-gray-200">
           <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
             <svg
@@ -110,9 +103,7 @@ export const TaskList = () => {
           <h3 className="font-semibold text-gray-800">Filtra e Ordina</h3>
         </div>
 
-        {/* Filtri e ordinamento */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {/* Filtro Priorità */}
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1.5">
               Priorità
@@ -134,7 +125,6 @@ export const TaskList = () => {
             </select>
           </div>
 
-          {/* Filtro Status */}
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1.5">
               Stato
@@ -154,7 +144,6 @@ export const TaskList = () => {
             </select>
           </div>
 
-          {/* Ordinamento */}
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1.5">
               Ordina per
@@ -175,7 +164,6 @@ export const TaskList = () => {
           </div>
         </div>
 
-        {/* Badge filtri attivi */}
         {(filterPriority !== "all" || filterStatus !== "all") && (
           <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-gray-200">
             <span className="text-xs text-gray-600 font-medium">
@@ -236,13 +224,55 @@ export const TaskList = () => {
         )}
       </div>
 
-      <NewTask openCreateTask={openCreateTask} />
+      {/* Bottone nuovo task */}
+      <div
+        onClick={openCreateTask}
+        className="border-2 border-dashed border-gray-300 hover:border-indigo-400 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl p-6 cursor-pointer transition-all duration-300 group"
+      >
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-100 to-purple-100 group-hover:from-indigo-200 group-hover:to-purple-200 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
+            <svg
+              className="w-6 h-6 text-indigo-600 group-hover:text-indigo-700"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.5}
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold text-gray-800 group-hover:text-indigo-700 transition-colors duration-300">
+              Aggiungi nuova attività
+            </h3>
+            <p className="text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300">
+              Clicca per creare un nuovo task
+            </p>
+          </div>
+          <svg
+            className="w-5 h-5 text-gray-400 group-hover:text-indigo-500 transition-all duration-300 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </div>
+      </div>
 
       {/* Visualizzazione tasks */}
       <div className="flex flex-col gap-4">
         {filteredAndSortedTasks.length > 0 ? (
           <>
-            {/* Info risultati */}
             <div className="text-sm text-gray-600 px-2">
               {filteredAndSortedTasks.length}{" "}
               {filteredAndSortedTasks.length === 1
