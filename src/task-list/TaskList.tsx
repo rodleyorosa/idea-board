@@ -1,63 +1,34 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTask } from "../hooks/useTask";
+import type {
+  FilterPriority,
+  FilterStatus,
+  SortType,
+} from "../hooks/useTaskFilters";
+import { useTaskFilters } from "../hooks/useTaskFilters";
 import { MainContentWrapper } from "../MainContentWrapper";
 import type { TaskPriority, TaskStatus } from "../types";
 import { TaskItem } from "./TaskItem";
 
-type SortType = "date-desc" | "date-asc" | "priority" | "status";
-type FilterPriority = TaskPriority | "all";
-type FilterStatus = TaskStatus | "all";
-
 export const TaskList = () => {
-  const [sortBy, setSortBy] = useState<SortType>("date-desc");
-  const [filterPriority, setFilterPriority] = useState<FilterPriority>("all");
-  const [filterStatus, setFilterStatus] = useState<FilterStatus>("all");
   const { tasks } = useTask();
   const navigate = useNavigate();
+
+  const {
+    sortBy,
+    filterPriority,
+    filterStatus,
+    setSortBy,
+    setFilterPriority,
+    setFilterStatus,
+    resetFilters,
+    filteredAndSortedTasks,
+  } = useTaskFilters(tasks);
 
   const openCreateTask = useCallback(() => {
     navigate("/task/create");
   }, [navigate]);
-
-  const filteredAndSortedTasks = useMemo(() => {
-    let result = [...tasks];
-
-    if (filterPriority !== "all") {
-      result = result.filter((task) => task.priority === filterPriority);
-    }
-
-    if (filterStatus !== "all") {
-      result = result.filter((task) => task.status === filterStatus);
-    }
-
-    result.sort((a, b) => {
-      switch (sortBy) {
-        case "date-desc": {
-          const aTime = a.createdAt?.toMillis() ?? 0;
-          const bTime = b.createdAt?.toMillis() ?? 0;
-          return bTime - aTime;
-        }
-        case "date-asc": {
-          const aTime = a.createdAt?.toMillis() ?? 0;
-          const bTime = b.createdAt?.toMillis() ?? 0;
-          return aTime - bTime;
-        }
-        case "priority": {
-          const priorityOrder = { alta: 0, media: 1, bassa: 2 };
-          return priorityOrder[a.priority] - priorityOrder[b.priority];
-        }
-        case "status": {
-          const statusOrder = { open: 0, "in-progress": 1, done: 2 };
-          return statusOrder[a.status] - statusOrder[b.status];
-        }
-        default:
-          return 0;
-      }
-    });
-
-    return result;
-  }, [tasks, filterPriority, filterStatus, sortBy]);
 
   const priorityLabels: Record<TaskPriority | "all", string> = {
     all: "Tutte",
@@ -212,10 +183,7 @@ export const TaskList = () => {
               </span>
             )}
             <button
-              onClick={() => {
-                setFilterPriority("all");
-                setFilterStatus("all");
-              }}
+              onClick={resetFilters}
               className="text-xs text-gray-500 hover:text-gray-700 underline cursor-pointer ml-auto"
             >
               Rimuovi tutti
@@ -333,10 +301,7 @@ export const TaskList = () => {
               Prova a modificare i filtri di ricerca
             </p>
             <button
-              onClick={() => {
-                setFilterPriority("all");
-                setFilterStatus("all");
-              }}
+              onClick={resetFilters}
               className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors cursor-pointer text-sm font-medium"
             >
               Rimuovi filtri
