@@ -146,7 +146,7 @@ export const TaskItem = ({ task }: TaskItemProps) => {
                 </button>
               </div>
             </div>
-            <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+            <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed whitespace-pre-wrap">
               {task.description}
             </p>
           </div>
