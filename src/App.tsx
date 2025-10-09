@@ -1,3 +1,4 @@
+// src/App.tsx
 import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./authentication/Login";
 import Signup from "./authentication/Signup";
@@ -5,6 +6,8 @@ import Dashboard from "./dashboard/Dashboard";
 import { useAuth } from "./hooks/useAuth";
 import { useSidebar } from "./hooks/useSidebar";
 import { Sidebar } from "./Sidebar";
+import { NoteCreation } from "./sticky-wall/NoteCreation";
+import { NoteDetail } from "./sticky-wall/NoteDetail";
 import { StickyWall } from "./sticky-wall/StickyWall";
 import { TaskCreation } from "./task-list/TaskCreation";
 import { TaskDetail } from "./task-list/TaskDetail";
@@ -37,10 +40,17 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Dashboard />} />
+
+          {/* Sticky Wall Routes */}
           <Route path="/sticky-wall" element={<StickyWall />} />
+          <Route path="/note/create" element={<NoteCreation />} />
+          <Route path="/note/:noteId" element={<NoteDetail />} />
+
+          {/* Task List Routes */}
           <Route path="/task-list" element={<TaskList />} />
           <Route path="/task/create" element={<TaskCreation />} />
           <Route path="/task/:taskId" element={<TaskDetail />} />
+
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </div>

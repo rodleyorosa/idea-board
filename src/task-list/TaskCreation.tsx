@@ -1,6 +1,7 @@
 // src/task-list/TaskCreation.tsx
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowBack } from "../assets/ArrowBack";
 import { priorityConfig } from "../constants";
 import { useTask } from "../hooks/useTask";
 import { MainContentWrapper } from "../MainContentWrapper";
@@ -39,43 +40,13 @@ export const TaskCreation = () => {
       fullscreenMobile
     >
       <div className="bg-white sm:rounded-2xl shadow-xl overflow-hidden flex flex-col">
-        {/* Header */}
         <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <button
+              <ArrowBack
                 onClick={handleBack}
-                className="flex items-center justify-center w-10 h-10 text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer flex-shrink-0"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                <svg
-                  className="w-7 h-7 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 4v16m8-8H4"
-                  />
-                </svg>
-              </div>
+                className="text-white hover:bg-white/10"
+              />
               <div>
                 <span className="text-white font-bold text-xl">
                   Nuova Attività

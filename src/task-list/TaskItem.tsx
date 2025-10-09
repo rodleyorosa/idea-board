@@ -83,7 +83,7 @@ export const TaskItem = ({ task }: TaskItemProps) => {
             </button>
           </div>
           {task.description && (
-            <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed mb-2 ml-8">
+            <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed mb-2 ml-8 whitespace-pre-wrap">
               {task.description}
             </p>
           )}
