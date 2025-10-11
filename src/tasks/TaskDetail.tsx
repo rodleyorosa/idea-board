@@ -116,7 +116,6 @@ export const TaskDetail = () => {
       fullscreenMobile
     >
       <div className="bg-white sm:rounded-2xl shadow-xl overflow-hidden flex flex-col">
-        {/* Header */}
         <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
           {/* Desktop: bottoni in alto */}
           <div className="hidden sm:flex items-center justify-between mb-4">

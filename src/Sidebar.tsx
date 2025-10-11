@@ -9,7 +9,7 @@ export const Sidebar = () => {
 
   const items = [
     { title: "Sticky Wall", path: "/sticky-wall" },
-    { title: "Task List", path: "/task-list" },
+    { title: "Tasks", path: "/tasks" },
   ];
 
   const { logout } = useAuth();
@@ -77,7 +77,7 @@ export const Sidebar = () => {
         </nav>
       </div>
       <button
-        onClick={handleLogout}  
+        onClick={handleLogout}
         className="cursor-pointer px-4 py-3 m-4 text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-200"
       >
         Logout

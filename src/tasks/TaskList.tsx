@@ -1,5 +1,5 @@
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+// src/tasks/TaskList.tsx - Ora è un componente esportabile (senza MainContentWrapper)
+
 import { useTask } from "../hooks/useTask";
 import type {
   FilterPriority,
@@ -7,13 +7,11 @@ import type {
   SortType,
 } from "../hooks/useTaskFilters";
 import { useTaskFilters } from "../hooks/useTaskFilters";
-import { MainContentWrapper } from "../MainContentWrapper";
 import type { TaskPriority, TaskStatus } from "../types";
 import { TaskItem } from "./TaskItem";
 
 export const TaskList = () => {
   const { tasks } = useTask();
-  const navigate = useNavigate();
 
   const {
     sortBy,
@@ -25,10 +23,6 @@ export const TaskList = () => {
     resetFilters,
     filteredAndSortedTasks,
   } = useTaskFilters(tasks);
-
-  const openCreateTask = useCallback(() => {
-    navigate("/task/create");
-  }, [navigate]);
 
   const priorityLabels: Record<TaskPriority | "all", string> = {
     all: "Tutte",
@@ -52,7 +46,7 @@ export const TaskList = () => {
   };
 
   return (
-    <MainContentWrapper title="Task List" className="lg:w-2/3">
+    <div className="space-y-6">
       {/* Barra filtri e ordinamento */}
       <div className="bg-white rounded-xl p-4 shadow-md border border-gray-200 space-y-4">
         <div className="flex items-center gap-2 pb-3 border-b border-gray-200">
@@ -192,51 +186,6 @@ export const TaskList = () => {
         )}
       </div>
 
-      {/* Bottone nuovo task */}
-      <div
-        onClick={openCreateTask}
-        className="border-2 border-dashed border-gray-300 hover:border-indigo-400 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl p-6 cursor-pointer transition-all duration-300 group"
-      >
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-100 to-purple-100 group-hover:from-indigo-200 group-hover:to-purple-200 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-            <svg
-              className="w-6 h-6 text-indigo-600 group-hover:text-indigo-700"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2.5}
-                d="M12 4v16m8-8H4"
-              />
-            </svg>
-          </div>
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold text-gray-800 group-hover:text-indigo-700 transition-colors duration-300">
-              Aggiungi nuova attività
-            </h3>
-            <p className="text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300">
-              Clicca per creare un nuovo task
-            </p>
-          </div>
-          <svg
-            className="w-5 h-5 text-gray-400 group-hover:text-indigo-500 transition-all duration-300 group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </div>
-      </div>
-
       {/* Visualizzazione tasks */}
       <div className="flex flex-col gap-4">
         {filteredAndSortedTasks.length > 0 ? (
@@ -309,6 +258,6 @@ export const TaskList = () => {
           </div>
         )}
       </div>
-    </MainContentWrapper>
+    </div>
   );
 };

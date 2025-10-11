@@ -1,4 +1,3 @@
-// src/task-list/TaskCreation.tsx
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowBack } from "../assets/ArrowBack";
@@ -59,10 +58,8 @@ export const TaskCreation = () => {
           </div>
         </div>
 
-        {/* Content */}
         <div className="p-6 flex-1 overflow-y-auto">
           <div className="space-y-6">
-            {/* Titolo */}
             <div className="group">
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
                 <div className="w-5 h-5 bg-indigo-100 rounded-lg flex items-center justify-center group-hover:bg-indigo-200 transition-colors">
@@ -92,7 +89,6 @@ export const TaskCreation = () => {
               />
             </div>
 
-            {/* Descrizione */}
             <div className="group">
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
                 <div className="w-5 h-5 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200 transition-colors">
@@ -121,7 +117,6 @@ export const TaskCreation = () => {
               />
             </div>
 
-            {/* Priorità */}
             <div className="group">
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
                 <div className="w-5 h-5 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200 transition-colors">
@@ -162,7 +157,6 @@ export const TaskCreation = () => {
           </div>
         </div>
 
-        {/* Footer */}
         <div className="p-6 bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200 flex-shrink-0">
           <div className="flex items-center justify-end gap-3">
             <button

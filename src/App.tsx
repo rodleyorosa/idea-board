@@ -1,4 +1,3 @@
-// src/App.tsx
 import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./authentication/Login";
 import Signup from "./authentication/Signup";
@@ -9,9 +8,9 @@ import { Sidebar } from "./Sidebar";
 import { NoteCreation } from "./sticky-wall/NoteCreation";
 import { NoteDetail } from "./sticky-wall/NoteDetail";
 import { StickyWall } from "./sticky-wall/StickyWall";
-import { TaskCreation } from "./task-list/TaskCreation";
-import { TaskDetail } from "./task-list/TaskDetail";
-import { TaskList } from "./task-list/TaskList";
+import { TaskCreation } from "./tasks/TaskCreation";
+import { TaskDetail } from "./tasks/TaskDetail";
+import { TasksView } from "./tasks/TaskView";
 
 const App = () => {
   const { isSidebarOpen, closeSidebar } = useSidebar();
@@ -46,10 +45,15 @@ const App = () => {
           <Route path="/note/create" element={<NoteCreation />} />
           <Route path="/note/:noteId" element={<NoteDetail />} />
 
-          {/* Task List Routes */}
-          <Route path="/task-list" element={<TaskList />} />
+          {/* Tasks Routes */}
+          <Route path="/tasks" element={<TasksView />} />
           <Route path="/task/create" element={<TaskCreation />} />
           <Route path="/task/:taskId" element={<TaskDetail />} />
+          <Route path="/task-list" element={<Navigate to="/tasks" replace />} />
+          <Route
+            path="/kanban-board"
+            element={<Navigate to="/tasks" replace />}
+          />
 
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
