@@ -10,7 +10,7 @@ import { NoteDetail } from "./sticky-wall/NoteDetail";
 import { StickyWall } from "./sticky-wall/StickyWall";
 import { TaskCreation } from "./tasks/TaskCreation";
 import { TaskDetail } from "./tasks/TaskDetail";
-import { TasksView } from "./tasks/TaskView";
+import { TaskView } from "./tasks/TaskView";
 
 const App = () => {
   const { isSidebarOpen, closeSidebar } = useSidebar();
@@ -46,7 +46,7 @@ const App = () => {
           <Route path="/note/:noteId" element={<NoteDetail />} />
 
           {/* Tasks Routes */}
-          <Route path="/tasks" element={<TasksView />} />
+          <Route path="/tasks" element={<TaskView />} />
           <Route path="/task/create" element={<TaskCreation />} />
           <Route path="/task/:taskId" element={<TaskDetail />} />
           <Route path="/task-list" element={<Navigate to="/tasks" replace />} />

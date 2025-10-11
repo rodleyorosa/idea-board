@@ -1,3 +1,4 @@
+import { AlertTriangle, Check, Zap } from "lucide-react";
 import type { NoteColor, TaskPriority, TaskStatus } from "../types";
 
 export const colors: Record<NoteColor, string> = {
@@ -21,63 +22,21 @@ export const statusConfig: Array<{
     label: "Aperto",
     color: "border-gray-200 bg-white hover:border-blue-300",
     activeColor: "border-blue-500 bg-blue-50",
-    icon: (
-      <svg
-        className="w-4 h-4"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-        />
-      </svg>
-    ),
+    icon: <AlertTriangle className="w-4 h-4" />,
   },
   {
     value: "in-progress",
     label: "In Corso",
     color: "border-gray-200 bg-white hover:border-amber-300",
     activeColor: "border-amber-500 bg-amber-50",
-    icon: (
-      <svg
-        className="w-4 h-4"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M13 10V3L4 14h7v7l9-11h-7z"
-        />
-      </svg>
-    ),
+    icon: <Zap className="w-4 h-4" />,
   },
   {
     value: "done",
     label: "Fatto",
     color: "border-gray-200 bg-white hover:border-green-300",
     activeColor: "border-green-500 bg-green-50",
-    icon: (
-      <svg
-        className="w-4 h-4"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M5 13l4 4L19 7"
-        />
-      </svg>
-    ),
+    icon: <Check className="w-4 h-4" />,
   },
 ];
 

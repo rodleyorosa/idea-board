@@ -1,6 +1,6 @@
+import { AlignLeft, ChevronLeft, Tag, Zap } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowBack } from "../assets/ArrowBack";
 import { priorityConfig } from "../constants";
 import { useTask } from "../hooks/useTask";
 import { MainContentWrapper } from "../MainContentWrapper";
@@ -38,10 +38,12 @@ export const TaskCreation = () => {
         <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <ArrowBack
+              <button
                 onClick={handleBack}
-                className="text-white hover:bg-white/10"
-              />
+                className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors cursor-pointer flex-shrink-0 text-white hover:bg-white/10"
+              >
+                <ChevronLeft className="w-5 h-5" strokeWidth={2} />
+              </button>
               <div>
                 <span className="text-white font-bold text-xl">New Task</span>
                 <p className="text-white/90 text-sm mt-0.5">
@@ -57,19 +59,7 @@ export const TaskCreation = () => {
             <div className="group">
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
                 <div className="w-5 h-5 bg-indigo-100 rounded-lg flex items-center justify-center group-hover:bg-indigo-200 transition-colors">
-                  <svg
-                    className="w-3 h-3 text-indigo-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
-                    />
-                  </svg>
+                  <Tag className="w-3 h-3 text-indigo-600" />
                 </div>
                 Title
                 <span className="text-red-500">*</span>
@@ -85,19 +75,7 @@ export const TaskCreation = () => {
             <div className="group">
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
                 <div className="w-5 h-5 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200 transition-colors">
-                  <svg
-                    className="w-3 h-3 text-purple-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6h16M4 12h16M4 18h7"
-                    />
-                  </svg>
+                  <AlignLeft className="w-3 h-3 text-purple-600" />
                 </div>
                 <span>Description</span>
               </label>
@@ -112,19 +90,7 @@ export const TaskCreation = () => {
             <div className="group">
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
                 <div className="w-5 h-5 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200 transition-colors">
-                  <svg
-                    className="w-3 h-3 text-orange-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
+                  <Zap className="w-3 h-3 text-orange-600" />
                 </div>
                 <span>Priority</span>
               </label>

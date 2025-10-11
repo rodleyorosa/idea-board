@@ -1,8 +1,7 @@
 import { FirebaseError } from "firebase/app";
+import { AlertCircle, Loader2 } from "lucide-react";
 import { type FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ErrorIcon } from "../assets/icons/authentication/ErrorIcon";
-import { Loader } from "../assets/Loader";
 import { useAuth } from "../hooks/useAuth";
 
 export default function Signup() {
@@ -71,7 +70,7 @@ export default function Signup() {
           <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
             <div className="flex">
               <div className="flex-shrink-0">
-                <ErrorIcon />
+                <AlertCircle className="h-5 w-5 text-red-400" />
               </div>
               <div className="ml-3">
                 <p className="text-sm text-red-700">{error}</p>
@@ -148,7 +147,11 @@ export default function Signup() {
             disabled={loading}
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:bg-purple-400 disabled:cursor-not-allowed transition duration-200 cursor-pointer"
           >
-            {loading ? <Loader /> : "Create Account"}
+            {loading ? (
+              <Loader2 className="h-5 w-5 animate-spin" />
+            ) : (
+              "Create Account"
+            )}
           </button>
         </form>
 

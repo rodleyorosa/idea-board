@@ -1,6 +1,6 @@
+import { LogOut, X } from "lucide-react";
 import { useCallback } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { CloseMenu } from "./assets/CloseMenu";
 import { useAuth } from "./hooks/useAuth";
 import { useSidebar } from "./hooks/useSidebar";
 
@@ -38,7 +38,12 @@ export const Sidebar = () => {
       <div className="flex flex-col">
         <div className="flex items-center justify-between p-4">
           <h2 className="text-xl font-semibold">Idea Board</h2>
-          <CloseMenu onClick={closeSidebar} />
+          <button
+            onClick={closeSidebar}
+            className="cursor-pointer p-1 hover:bg-gray-100 rounded lg:hidden"
+          >
+            <X className="w-6 h-6" strokeWidth={2} />
+          </button>
         </div>
         <nav className="px-4">
           <ul className="space-y-3">
@@ -54,7 +59,7 @@ export const Sidebar = () => {
             >
               Dashboard
             </NavLink>
-            <hr className="text-gray-300"/>
+            <hr className="text-gray-300" />
             {items.map((item, key) => {
               return (
                 <NavLink
@@ -78,8 +83,9 @@ export const Sidebar = () => {
       </div>
       <button
         onClick={handleLogout}
-        className="cursor-pointer px-4 py-3 m-4 text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-200"
+        className="cursor-pointer px-4 py-3 m-4 text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-200 flex items-center justify-center gap-2"
       >
+        <LogOut className="w-4 h-4" />
         Logout
       </button>
     </div>

@@ -1,8 +1,6 @@
+import { Clock, GripVertical, Inbox } from "lucide-react";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ClockIcon } from "../../assets/icons/ClockIcon";
-import { DragHandle } from "../../assets/icons/tasks/kanban/DragHandle";
-import { InboxIcon } from "../../assets/icons/tasks/kanban/InboxIcon";
 import { useTask } from "../../hooks/useTask";
 import type { TaskItemType, TaskStatus } from "../../types";
 import { getPriorityConfig } from "../../utils";
@@ -135,7 +133,7 @@ export const KanbanBoard = () => {
               <div className="space-y-3">
                 {columnTasks.length === 0 ? (
                   <div className="text-center py-8 text-gray-400">
-                    <InboxIcon />
+                    <Inbox className="w-12 h-12 mx-auto mb-2 opacity-50" />
                     <p className="text-sm">
                       {isDraggedOver ? "Rilascia qui" : "Nessun task"}
                     </p>
@@ -176,14 +174,14 @@ export const KanbanBoard = () => {
 
                         <div className="flex items-center justify-between pt-2 border-t border-gray-100">
                           <div className="flex items-center gap-1 text-xs text-gray-500">
-                            <ClockIcon />
+                            <Clock className="w-3.5 h-3.5" />
                             <span>
                               {task.createdAt
                                 ?.toDate()
                                 .toLocaleDateString("it-IT")}
                             </span>
                           </div>
-                          <DragHandle />
+                          <GripVertical className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors" />
                         </div>
                       </div>
                     );

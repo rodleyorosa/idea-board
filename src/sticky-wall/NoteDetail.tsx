@@ -1,9 +1,6 @@
+import { ChevronLeft, Clock, Pencil, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowBack } from "../assets/ArrowBack";
-import { ClockIcon } from "../assets/icons/ClockIcon";
-import { DeleteIconButton } from "../assets/icons/sticky-wall/DeleteIconButton";
-import { EditIconButton } from "../assets/icons/sticky-wall/EditIconButton";
 import { colors } from "../constants";
 import { useNote } from "../hooks/useNote";
 import { MainContentWrapper } from "../MainContentWrapper";
@@ -106,10 +103,12 @@ export const NoteDetail = () => {
       >
         <div className="p-4 sm:p-6 flex items-center justify-between border-b border-gray-200/50 flex-shrink-0 gap-3">
           <div className="flex items-center gap-3 flex-1 min-w-0">
-            <ArrowBack
+            <button
               onClick={handleBack}
-              className="hover:bg-white/30 text-gray-700 flex-shrink-0"
-            />
+              className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors cursor-pointer flex-shrink-0 hover:bg-white/30 text-gray-700"
+            >
+              <ChevronLeft className="w-5 h-5" strokeWidth={2} />
+            </button>
             {isEditing ? (
               <input
                 type="text"
@@ -126,11 +125,24 @@ export const NoteDetail = () => {
           </div>
 
           <div className="flex items-center gap-2 flex-shrink-0">
-            {!isEditing && <EditIconButton onClick={handleEdit} />}
-            <DeleteIconButton
+            {!isEditing && (
+              <button
+                onClick={handleEdit}
+                className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors cursor-pointer bg-white/50 hover:bg-white/70 text-gray-700"
+              >
+                <Pencil className="w-4 h-4" />
+              </button>
+            )}
+            <button
               onClick={handleDelete}
-              showDeleteConfirm={showDeleteConfirm}
-            />
+              className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors cursor-pointer ${
+                showDeleteConfirm
+                  ? "bg-red-600 hover:bg-red-700 text-white"
+                  : "bg-white/50 hover:bg-white/70 text-gray-700"
+              }`}
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
@@ -177,7 +189,7 @@ export const NoteDetail = () => {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs text-gray-500">
-                  <ClockIcon />
+                  <Clock className="w-3.5 h-3.5" />
                   <span>{formatTimestamp(note.createdAt)}</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -199,7 +211,7 @@ export const NoteDetail = () => {
             </div>
           ) : (
             <div className="flex items-center gap-2 text-sm text-gray-600">
-              <ClockIcon />
+              <Clock className="w-3.5 h-3.5" />
               <span>{formatTimestamp(note.createdAt)}</span>
             </div>
           )}

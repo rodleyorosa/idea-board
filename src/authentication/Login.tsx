@@ -1,8 +1,7 @@
 import { FirebaseError } from "firebase/app";
+import { AlertCircle, Loader2 } from "lucide-react";
 import { type FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ErrorIcon } from "../assets/icons/authentication/ErrorIcon";
-import { Loader } from "../assets/Loader";
 import { useAuth } from "../hooks/useAuth";
 
 export default function Login() {
@@ -69,7 +68,7 @@ export default function Login() {
           <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
             <div className="flex">
               <div className="flex-shrink-0">
-                <ErrorIcon />
+                <AlertCircle className="h-5 w-5 text-red-400" />
               </div>
               <div className="ml-3">
                 <p className="text-sm text-red-700">{error}</p>
@@ -126,12 +125,12 @@ export default function Login() {
             disabled={loading}
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed transition duration-200 cursor-pointer"
           >
-            {loading ? <Loader /> : "Sign in"}
+            {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Sign in"}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-600">
-          Don’t have an account?{" "}
+          Don't have an account?{" "}
           <Link
             to="/signup"
             className="font-medium text-indigo-600 hover:text-indigo-500 transition"

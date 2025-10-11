@@ -1,8 +1,6 @@
+import { CheckSquare, StickyNote, User } from "lucide-react";
 import { useMemo } from "react";
 import { NavLink } from "react-router-dom";
-import { StickyWallIcon } from "../assets/icons/dashboard/StickyWallIcon";
-import { TaskListIcon } from "../assets/icons/dashboard/TaskListIcon";
-import { UserIcon } from "../assets/icons/dashboard/UserIcon";
 import { useAuth } from "../hooks/useAuth";
 import { useNote } from "../hooks/useNote";
 import { useTask } from "../hooks/useTask";
@@ -13,14 +11,6 @@ export default function Dashboard() {
   const { notes } = useNote();
   const { tasks } = useTask();
 
-  const tasksByStatus = useMemo(() => {
-    return {
-      open: tasks.filter((t) => t.status === "open").length,
-      inProgress: tasks.filter((t) => t.status === "in-progress").length,
-      done: tasks.filter((t) => t.status === "done").length,
-    };
-  }, [tasks]);
-
   const stats = useMemo(
     () => [
       {
@@ -29,7 +19,7 @@ export default function Dashboard() {
         label: "Sticky Wall",
         count: notes.length,
         itemName: notes.length === 1 ? "note" : "notes",
-        icon: <StickyWallIcon />,
+        icon: <StickyNote className="w-6 h-6 text-blue-600" />,
         bgColor: "bg-blue-100",
       },
       {
@@ -38,11 +28,11 @@ export default function Dashboard() {
         label: "Tasks",
         count: tasks.length,
         itemName: tasks.length === 1 ? "task" : "tasks",
-        icon: <TaskListIcon />,
+        icon: <CheckSquare className="w-6 h-6 text-green-600" />,
         bgColor: "bg-indigo-100",
       },
     ],
-    [notes.length, tasks.length, tasksByStatus]
+    [notes.length, tasks.length]
   );
 
   return (
@@ -52,7 +42,7 @@ export default function Dashboard() {
           <div className="flex items-center space-x-4">
             <div className="flex-shrink-0">
               <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center">
-                <UserIcon />
+                <User className="w-8 h-8 text-indigo-600" />
               </div>
             </div>
             <div className="flex-1 min-w-0">

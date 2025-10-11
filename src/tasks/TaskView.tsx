@@ -1,17 +1,14 @@
+import { ClipboardList, Columns, List, Plus } from "lucide-react";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { ClipboardIcon } from "../assets/icons/tasks/ClipboardIcon";
-import { KanbanIcon } from "../assets/icons/tasks/KanbanIcon";
-import { MenuIcon } from "../assets/icons/tasks/MenuIcon";
-import { PlusIcon } from "../assets/icons/tasks/PlusIcon";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { KanbanBoard } from "./kanban/KanbanBoard";
 import { MainContentWrapper } from "../MainContentWrapper";
+import { KanbanBoard } from "./kanban/KanbanBoard";
 import { TaskList } from "./list/TaskList";
 
 type ViewMode = "list" | "kanban";
 
-export const TasksView = () => {
+export const TaskView = () => {
   const navigate = useNavigate();
   const [viewMode, setViewMode] = useLocalStorage<ViewMode>(
     "tasks-view-mode",
@@ -33,7 +30,7 @@ export const TasksView = () => {
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center hidden md:flex">
-              <ClipboardIcon />
+              <ClipboardList className="w-5 h-5 text-indigo-600" />
             </div>
             <div>
               <h3 className="font-semibold text-gray-800">View Tasks</h3>
@@ -53,7 +50,7 @@ export const TasksView = () => {
                     : "text-gray-600 hover:text-gray-900"
                 }`}
               >
-                <MenuIcon />
+                <List className="w-4 h-4" />
                 <span className="text-sm font-medium hidden sm:inline">
                   List
                 </span>
@@ -67,7 +64,7 @@ export const TasksView = () => {
                     : "text-gray-600 hover:text-gray-900"
                 }`}
               >
-                <KanbanIcon />
+                <Columns className="w-4 h-4" />
                 <span className="text-sm font-medium hidden sm:inline">
                   Kanban
                 </span>
@@ -78,7 +75,7 @@ export const TasksView = () => {
               onClick={createNewTask}
               className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors cursor-pointer"
             >
-              <PlusIcon />
+              <Plus className="w-4 h-4" />
               <span className="text-sm font-medium hidden sm:inline">
                 New Task
               </span>

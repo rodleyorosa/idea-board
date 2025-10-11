@@ -1,4 +1,4 @@
-import { Hamburger } from "./assets/Hamburger";
+import { Menu } from "lucide-react";
 import { useSidebar } from "./hooks/useSidebar";
 
 interface MainContentWrapperProps {
@@ -27,7 +27,9 @@ export const MainContentWrapper = ({
           fullscreenMobile ? "px-4 pt-4 sm:px-0 sm:pt-0" : ""
         }`}
       >
-        <Hamburger onClick={openSidebar} />
+        <button onClick={openSidebar} className="cursor-pointer lg:hidden">
+          <Menu className="w-[30px] h-[30px]" strokeWidth={2} />
+        </button>
         <h1 className="text-3xl font-bold">{title}</h1>
       </div>
       {children}

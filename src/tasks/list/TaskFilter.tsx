@@ -1,3 +1,4 @@
+import { SlidersHorizontal, X } from "lucide-react";
 import {
   type FilterPriority,
   type FilterStatus,
@@ -49,19 +50,7 @@ export const TaskFilter = ({
     <div className="bg-white rounded-xl p-4 shadow-md border border-gray-200 space-y-4">
       <div className="flex items-center gap-2 pb-3 border-b border-gray-200">
         <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
-          <svg
-            className="w-4 h-4 text-indigo-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-            />
-          </svg>
+          <SlidersHorizontal className="w-4 h-4 text-indigo-600" />
         </div>
         <h3 className="font-semibold text-gray-800">Filter and sort</h3>
       </div>
@@ -139,17 +128,7 @@ export const TaskFilter = ({
                 onClick={() => setFilterPriority("all")}
                 className="hover:bg-indigo-200 rounded-full p-0.5 cursor-pointer"
               >
-                <svg
-                  className="w-3 h-3"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <X className="w-3 h-3" />
               </button>
             </span>
           )}
@@ -160,17 +139,7 @@ export const TaskFilter = ({
                 onClick={() => setFilterStatus("all")}
                 className="hover:bg-purple-200 rounded-full p-0.5 cursor-pointer"
               >
-                <svg
-                  className="w-3 h-3"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <X className="w-3 h-3" />
               </button>
             </span>
           )}

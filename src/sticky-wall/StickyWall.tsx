@@ -1,3 +1,4 @@
+import { Plus } from "lucide-react";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { colors } from "../constants";
@@ -36,7 +37,9 @@ export const StickyWall = () => {
               "
             >
               <div className="text-center">
-                <div className="text-4xl text-gray-400 mb-2">+</div>
+                <div className="flex items-center justify-center mb-2">
+                  <Plus className="w-10 h-10 text-gray-400" />
+                </div>
                 <p className="text-gray-500 font-medium">Create a new note</p>
               </div>
             </div>

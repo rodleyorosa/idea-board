@@ -1,6 +1,6 @@
+import { ChevronLeft } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowBack } from "../assets/ArrowBack";
 import { colors } from "../constants";
 import { useNote } from "../hooks/useNote";
 import { MainContentWrapper } from "../MainContentWrapper";
@@ -33,20 +33,18 @@ export const NoteCreation = () => {
   }, [addNote, color, content, navigate, title]);
 
   return (
-    <MainContentWrapper
-      title="New Note"
-      className="lg:w-2/3"
-      fullscreenMobile
-    >
+    <MainContentWrapper title="New Note" className="lg:w-2/3" fullscreenMobile>
       <div
         className={`${colors[color]} sm:rounded-2xl shadow-xl overflow-hidden flex flex-col min-h-[calc(100vh-8rem)] sm:min-h-[600px]`}
       >
         <div className="p-4 sm:p-6 flex items-center justify-between border-b border-gray-200/50 flex-shrink-0 gap-3">
           <div className="flex items-center gap-3 flex-1 min-w-0">
-            <ArrowBack
+            <button
               onClick={handleBack}
-              className="hover:bg-white/30 text-gray-700 flex-shrink-0"
-            />
+              className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors cursor-pointer flex-shrink-0 hover:bg-white/30 text-gray-700"
+            >
+              <ChevronLeft className="w-5 h-5" strokeWidth={2} />
+            </button>
             <input
               type="text"
               value={title}
