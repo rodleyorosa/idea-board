@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
   type User,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -20,8 +21,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const signup = async (email: string, password: string): Promise<void> => {
-    await createUserWithEmailAndPassword(auth, email, password);
+  const signup = async (
+    email: string,
+    password: string,
+    displayName: string
+  ): Promise<void> => {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    await updateProfile(userCredential.user, { displayName });
+    const updatedUser = {
+      ...userCredential.user,
+      displayName,
+    };
+    setUser(updatedUser);
   };
 
   const login = async (email: string, password: string): Promise<void> => {

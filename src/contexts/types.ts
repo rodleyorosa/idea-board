@@ -8,7 +8,11 @@ export interface SidebarContextType {
 
 export interface AuthContextType {
   user: User | null;
-  signup: (email: string, password: string) => Promise<void>;
+  signup: (
+    email: string,
+    password: string,
+    displayName: string
+  ) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;

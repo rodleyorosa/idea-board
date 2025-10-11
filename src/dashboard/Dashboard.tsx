@@ -19,8 +19,11 @@ export default function Dashboard() {
         label: "Sticky Wall",
         count: notes.length,
         itemName: notes.length === 1 ? "note" : "notes",
-        icon: <StickyNote className="w-6 h-6 text-blue-600" />,
-        bgColor: "bg-blue-100",
+        icon: StickyNote,
+        bgGradient: "from-blue-500 to-cyan-500",
+        bgLight: "bg-blue-50",
+        iconColor: "text-blue-600",
+        hoverBorder: "hover:border-blue-300",
       },
       {
         id: "tasks",
@@ -28,12 +31,17 @@ export default function Dashboard() {
         label: "Tasks",
         count: tasks.length,
         itemName: tasks.length === 1 ? "task" : "tasks",
-        icon: <CheckSquare className="w-6 h-6 text-green-600" />,
-        bgColor: "bg-indigo-100",
+        icon: CheckSquare,
+        bgGradient: "from-green-500 to-emerald-500",
+        bgLight: "bg-green-50",
+        iconColor: "text-green-600",
+        hoverBorder: "hover:border-green-300",
       },
     ],
     [notes.length, tasks.length]
   );
+
+  const displayName = user?.displayName || user?.email?.split("@")[0] || "User";
 
   return (
     <MainContentWrapper title="Dashboard" className="lg:w-2/3">
@@ -46,41 +54,43 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-2xl font-bold text-gray-900">Welcome!</h2>
+              <h2 className="text-2xl font-bold text-gray-900">
+                Welcome back, {displayName}!
+              </h2>
               <p className="text-gray-600 text-sm sm:text-base truncate">
                 {user?.email}
-              </p>
-              <p className="text-gray-400 text-xs font-mono truncate">
-                ID: {user?.uid}
               </p>
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {stats.map((stat) => (
-            <NavLink
-              key={stat.id}
-              to={stat.path}
-              className="bg-white rounded-xl shadow-md border border-gray-200 p-6 hover:shadow-lg transition-all hover:border-indigo-200 group"
-            >
-              <div className="flex items-start">
-                <div
-                  className={`flex-shrink-0 ${stat.bgColor} rounded-lg p-3 group-hover:scale-110 transition-transform`}
-                >
-                  {stat.icon}
+          {stats.map((stat) => {
+            const Icon = stat.icon;
+            return (
+              <NavLink
+                key={stat.id}
+                to={stat.path}
+                className="bg-white rounded-xl shadow-md border border-gray-200 p-6 hover:shadow-lg transition-all hover:border-indigo-200 group"
+              >
+                <div className="flex items-start">
+                  <div
+                    className={`flex-shrink-0 ${stat.bgLight} rounded-lg p-3 group-hover:scale-110 transition-transform`}
+                  >
+                    <Icon className={`w-6 h-6 ${stat.iconColor}`} />
+                  </div>
+                  <div className="ml-4 flex-1">
+                    <p className="text-sm font-medium text-gray-500">
+                      {stat.label}
+                    </p>
+                    <p className="text-lg font-semibold text-gray-900">
+                      {stat.count} {stat.itemName}
+                    </p>
+                  </div>
                 </div>
-                <div className="ml-4 flex-1">
-                  <p className="text-sm font-medium text-gray-500">
-                    {stat.label}
-                  </p>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {stat.count} {stat.itemName}
-                  </p>
-                </div>
-              </div>
-            </NavLink>
-          ))}
+              </NavLink>
+            );
+          })}
         </div>
       </div>
     </MainContentWrapper>
