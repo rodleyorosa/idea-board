@@ -1,7 +1,7 @@
-import { useTask } from "../hooks/useTask";
-import { useTaskFilters } from "../hooks/useTaskFilters";
+import { useTask } from "../../hooks/useTask";
+import { useTaskFilters } from "../../hooks/useTaskFilters";
 import { TaskFilter } from "./TaskFilter";
-import { TaskItem } from "./list/TaskItem";
+import { TaskItem } from "./TaskItem";
 
 export const TaskList = () => {
   const { tasks } = useTask();

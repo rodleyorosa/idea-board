@@ -1,58 +1,60 @@
 import type { Timestamp } from "firebase/firestore";
 
 /**
- * Converte un Timestamp di Firebase in una data leggibile in italiano
- * @param timestamp - Il timestamp da convertire
- * @param format - Il formato desiderato: 'full' | 'short' | 'relative'
- * @returns La data formattata
+ * Converts a Firebase Timestamp into a readable English date
+ * @param timestamp - The timestamp to convert
+ * @param format - Desired format: 'full' | 'short' | 'relative'
+ * @returns The formatted date
  */
 export const formatTimestamp = (
   timestamp: Timestamp | undefined,
   format: "full" | "short" | "relative" = "short"
 ): string => {
-  if (!timestamp) return "Data non disponibile";
+  if (!timestamp) return "Date not available";
 
   const date = timestamp.toDate();
   const now = new Date();
   const diffInMs = now.getTime() - date.getTime();
   const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
-  // Formato relativo (es: "2 ore fa", "ieri", "3 giorni fa")
+  // Relative format (e.g. "2 hours ago", "yesterday", "3 days ago")
   if (format === "relative") {
     const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
     const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
 
-    if (diffInMinutes < 1) return "Adesso";
+    if (diffInMinutes < 1) return "Just now";
     if (diffInMinutes < 60)
-      return `${diffInMinutes} ${diffInMinutes === 1 ? "minuto" : "minuti"} fa`;
+      return `${diffInMinutes} ${
+        diffInMinutes === 1 ? "minute" : "minutes"
+      } ago`;
     if (diffInHours < 24)
-      return `${diffInHours} ${diffInHours === 1 ? "ora" : "ore"} fa`;
-    if (diffInDays === 0) return "Oggi";
-    if (diffInDays === 1) return "Ieri";
-    if (diffInDays < 7) return `${diffInDays} giorni fa`;
+      return `${diffInHours} ${diffInHours === 1 ? "hour" : "hours"} ago`;
+    if (diffInDays === 0) return "Today";
+    if (diffInDays === 1) return "Yesterday";
+    if (diffInDays < 7) return `${diffInDays} days ago`;
     if (diffInDays < 30) {
       const weeks = Math.floor(diffInDays / 7);
-      return `${weeks} ${weeks === 1 ? "settimana" : "settimane"} fa`;
+      return `${weeks} ${weeks === 1 ? "week" : "weeks"} ago`;
     }
     if (diffInDays < 365) {
       const months = Math.floor(diffInDays / 30);
-      return `${months} ${months === 1 ? "mese" : "mesi"} fa`;
+      return `${months} ${months === 1 ? "month" : "months"} ago`;
     }
     const years = Math.floor(diffInDays / 365);
-    return `${years} ${years === 1 ? "anno" : "anni"} fa`;
+    return `${years} ${years === 1 ? "year" : "years"} ago`;
   }
 
-  // Formato breve (es: "15 Gen 2024")
+  // Short format (e.g. "15 Jan 2024")
   if (format === "short") {
     const day = date.getDate();
-    const month = date.toLocaleDateString("it-IT", { month: "short" });
+    const month = date.toLocaleDateString("en-US", { month: "short" });
     const year = date.getFullYear();
     return `${day} ${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`;
   }
 
-  // Formato completo (es: "Lunedì 15 Gennaio 2024, 14:30")
+  // Full format (e.g. "Monday, January 15, 2024, 2:30 PM")
   if (format === "full") {
-    return date.toLocaleDateString("it-IT", {
+    return date.toLocaleDateString("en-US", {
       weekday: "long",
       year: "numeric",
       month: "long",
@@ -62,11 +64,11 @@ export const formatTimestamp = (
     });
   }
 
-  return date.toLocaleDateString("it-IT");
+  return date.toLocaleDateString("en-US");
 };
 
 /**
- * Converte un Timestamp in una data relativa breve (es: "2h fa", "3g fa")
+ * Converts a Timestamp into a short relative date (e.g. "2h ago", "3d ago")
  */
 export const formatTimestampShortRelative = (
   timestamp: Timestamp | undefined
@@ -80,17 +82,17 @@ export const formatTimestampShortRelative = (
   const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
   const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
-  if (diffInMinutes < 1) return "ora";
-  if (diffInMinutes < 60) return `${diffInMinutes}m fa`;
-  if (diffInHours < 24) return `${diffInHours}h fa`;
-  if (diffInDays < 7) return `${diffInDays}g fa`;
-  if (diffInDays < 30) return `${Math.floor(diffInDays / 7)}set fa`;
-  if (diffInDays < 365) return `${Math.floor(diffInDays / 30)}m fa`;
-  return `${Math.floor(diffInDays / 365)}a fa`;
+  if (diffInMinutes < 1) return "now";
+  if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
+  if (diffInHours < 24) return `${diffInHours}h ago`;
+  if (diffInDays < 7) return `${diffInDays}d ago`;
+  if (diffInDays < 30) return `${Math.floor(diffInDays / 7)}w ago`;
+  if (diffInDays < 365) return `${Math.floor(diffInDays / 30)}mo ago`;
+  return `${Math.floor(diffInDays / 365)}y ago`;
 };
 
 /**
- * Verifica se una data è oggi
+ * Checks if a timestamp is today
  */
 export const isToday = (timestamp: Timestamp | undefined): boolean => {
   if (!timestamp) return false;
@@ -104,7 +106,7 @@ export const isToday = (timestamp: Timestamp | undefined): boolean => {
 };
 
 /**
- * Verifica se una data è ieri
+ * Checks if a timestamp is yesterday
  */
 export const isYesterday = (timestamp: Timestamp | undefined): boolean => {
   if (!timestamp) return false;

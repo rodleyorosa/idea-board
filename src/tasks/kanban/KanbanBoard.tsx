@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ClockIcon } from "../assets/icons/tasks/kanban/ClockIcon";
-import { DragHandle } from "../assets/icons/tasks/kanban/DragHandle";
-import { InboxIcon } from "../assets/icons/tasks/kanban/InboxIcon";
-import { useTask } from "../hooks/useTask";
-import type { TaskItemType, TaskStatus } from "../types";
-import { getPriorityConfig } from "../utils";
+import { ClockIcon } from "../../assets/icons/ClockIcon";
+import { DragHandle } from "../../assets/icons/tasks/kanban/DragHandle";
+import { InboxIcon } from "../../assets/icons/tasks/kanban/InboxIcon";
+import { useTask } from "../../hooks/useTask";
+import type { TaskItemType, TaskStatus } from "../../types";
+import { getPriorityConfig } from "../../utils";
 
 const COLUMNS: Array<{
   id: TaskStatus;

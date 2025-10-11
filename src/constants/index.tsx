@@ -89,22 +89,22 @@ export const priorityConfig: Array<{
   icon: string;
 }> = [
   {
-    value: "bassa",
-    label: "Bassa",
+    value: "low",
+    label: "Low",
     color: "bg-white text-green-600 border-green-300 hover:border-green-400",
     activeColor: "bg-green-50 text-green-700 border-green-500",
     icon: "↓",
   },
   {
-    value: "media",
-    label: "Media",
+    value: "medium",
+    label: "Medium",
     color: "bg-white text-yellow-600 border-yellow-300 hover:border-yellow-400",
     activeColor: "bg-yellow-50 text-yellow-700 border-yellow-500",
     icon: "→",
   },
   {
-    value: "alta",
-    label: "Alta",
+    value: "high",
+    label: "High",
     color: "bg-white text-red-600 border-red-300 hover:border-red-400",
     activeColor: "bg-red-50 text-red-700 border-red-500",
     icon: "↑",

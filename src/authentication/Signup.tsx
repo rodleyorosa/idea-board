@@ -19,11 +19,11 @@ export default function Signup() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      return setError("Le password non coincidono");
+      return setError("Passwords do not match");
     }
 
     if (password.length < 6) {
-      return setError("La password deve essere di almeno 6 caratteri");
+      return setError("Password must be at least 6 characters long");
     }
 
     try {
@@ -35,7 +35,7 @@ export default function Signup() {
       if (err instanceof FirebaseError) {
         setError(getErrorMessage(err.code));
       } else {
-        setError("Errore durante la registrazione");
+        setError("Error during registration");
       }
     } finally {
       setLoading(false);
@@ -45,13 +45,13 @@ export default function Signup() {
   const getErrorMessage = (errorCode: string): string => {
     switch (errorCode) {
       case "auth/email-already-in-use":
-        return "Email già registrata";
+        return "Email is already registered";
       case "auth/invalid-email":
-        return "Email non valida";
+        return "Invalid email address";
       case "auth/weak-password":
-        return "Password troppo debole";
+        return "Password is too weak";
       default:
-        return "Errore durante la registrazione";
+        return "Error during registration";
     }
   };
 
@@ -60,10 +60,10 @@ export default function Signup() {
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl">
         <div>
           <h2 className="text-center text-3xl font-bold text-gray-900">
-            Crea un nuovo account
+            Create a new account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Inizia gratuitamente oggi stesso
+            Get started for free today
           </p>
         </div>
 
@@ -97,7 +97,7 @@ export default function Signup() {
                 required
                 disabled={loading}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition"
-                placeholder="tu@esempio.com"
+                placeholder="you@example.com"
               />
             </div>
 
@@ -119,7 +119,7 @@ export default function Signup() {
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition"
                 placeholder="••••••••"
               />
-              <p className="mt-1 text-xs text-gray-500">Minimo 6 caratteri</p>
+              <p className="mt-1 text-xs text-gray-500">Minimum 6 characters</p>
             </div>
 
             <div>
@@ -127,7 +127,7 @@ export default function Signup() {
                 htmlFor="confirmPassword"
                 className="block text-sm font-medium text-gray-700"
               >
-                Conferma Password
+                Confirm Password
               </label>
               <input
                 id="confirmPassword"
@@ -148,17 +148,17 @@ export default function Signup() {
             disabled={loading}
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:bg-purple-400 disabled:cursor-not-allowed transition duration-200 cursor-pointer"
           >
-            {loading ? <Loader /> : "Crea Account"}
+            {loading ? <Loader /> : "Create Account"}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-600">
-          Hai già un account?{" "}
+          Already have an account?{" "}
           <Link
             to="/login"
             className="font-medium text-purple-600 hover:text-purple-500 transition"
           >
-            Accedi
+            Sign in
           </Link>
         </p>
       </div>

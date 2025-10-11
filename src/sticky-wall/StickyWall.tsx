@@ -1,14 +1,12 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { colors } from "../constants";
-import { useAuth } from "../hooks/useAuth";
 import { useNote } from "../hooks/useNote";
 import { MainContentWrapper } from "../MainContentWrapper";
 import type { NoteItem } from "../types";
 
 export const StickyWall = () => {
-  const { user } = useAuth();
-  const { notes } = useNote(user?.uid || null);
+  const { notes } = useNote();
   const navigate = useNavigate();
 
   const openNote = useCallback(
@@ -39,7 +37,7 @@ export const StickyWall = () => {
             >
               <div className="text-center">
                 <div className="text-4xl text-gray-400 mb-2">+</div>
-                <p className="text-gray-500 font-medium">Aggiungi nuova nota</p>
+                <p className="text-gray-500 font-medium">Create a new note</p>
               </div>
             </div>
 

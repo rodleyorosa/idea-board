@@ -11,7 +11,7 @@ export default function Login() {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  // todo: add google authentication
+  // TODO: add Google authentication
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ export default function Login() {
       if (err instanceof FirebaseError) {
         setError(getErrorMessage(err.code));
       } else {
-        setError("Errore durante il login");
+        setError("Error during login");
       }
     } finally {
       setLoading(false);
@@ -37,19 +37,19 @@ export default function Login() {
   const getErrorMessage = (errorCode: string): string => {
     switch (errorCode) {
       case "auth/user-not-found":
-        return "Utente non trovato";
+        return "User not found";
       case "auth/wrong-password":
-        return "Password errata";
+        return "Incorrect password";
       case "auth/invalid-email":
-        return "Email non valida";
+        return "Invalid email address";
       case "auth/user-disabled":
-        return "Account disabilitato";
+        return "Account disabled";
       case "auth/popup-closed-by-user":
-        return "Login annullato";
+        return "Login cancelled";
       case "auth/invalid-credential":
-        return "Credenziali non valide";
+        return "Invalid credentials";
       default:
-        return "Errore durante il login";
+        return "Error during login";
     }
   };
 
@@ -58,10 +58,10 @@ export default function Login() {
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl">
         <div>
           <h2 className="text-center text-3xl font-bold text-gray-900">
-            Accedi al tuo account
+            Sign in to your account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Bentornato! Inserisci le tue credenziali
+            Welcome back! Enter your credentials
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export default function Login() {
                 required
                 disabled={loading}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition"
-                placeholder="tu@esempio.com"
+                placeholder="you@example.com"
               />
             </div>
 
@@ -126,17 +126,17 @@ export default function Login() {
             disabled={loading}
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed transition duration-200 cursor-pointer"
           >
-            {loading ? <Loader /> : "Accedi"}
+            {loading ? <Loader /> : "Sign in"}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-600">
-          Non hai un account?{" "}
+          Don’t have an account?{" "}
           <Link
             to="/signup"
             className="font-medium text-indigo-600 hover:text-indigo-500 transition"
           >
-            Registrati
+            Sign up
           </Link>
         </p>
       </div>

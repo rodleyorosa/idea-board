@@ -9,7 +9,7 @@ import type { TaskPriority } from "../types";
 export const TaskCreation = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState<TaskPriority>("media");
+  const [priority, setPriority] = useState<TaskPriority>("medium");
   const { addTask } = useTask();
   const navigate = useNavigate();
 
@@ -33,11 +33,7 @@ export const TaskCreation = () => {
   }, [addTask, description, navigate, priority, title]);
 
   return (
-    <MainContentWrapper
-      title="Nuovo Task"
-      className="lg:w-2/3"
-      fullscreenMobile
-    >
+    <MainContentWrapper title="New Task" className="lg:w-2/3" fullscreenMobile>
       <div className="bg-white sm:rounded-2xl shadow-xl overflow-hidden flex flex-col">
         <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
           <div className="flex items-center justify-between">
@@ -47,11 +43,9 @@ export const TaskCreation = () => {
                 className="text-white hover:bg-white/10"
               />
               <div>
-                <span className="text-white font-bold text-xl">
-                  Nuova Attività
-                </span>
+                <span className="text-white font-bold text-xl">New Task</span>
                 <p className="text-white/90 text-sm mt-0.5">
-                  Crea un nuovo task per il tuo progetto
+                  Create a new task
                 </p>
               </div>
             </div>
@@ -77,7 +71,7 @@ export const TaskCreation = () => {
                     />
                   </svg>
                 </div>
-                Titolo
+                Title
                 <span className="text-red-500">*</span>
               </label>
               <input
@@ -85,7 +79,6 @@ export const TaskCreation = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl outline-none focus:border-indigo-500 focus:bg-white transition-all duration-200 text-gray-800 font-medium placeholder:text-gray-400"
-                placeholder="Es: Implementare nuovo design..."
               />
             </div>
 
@@ -106,14 +99,13 @@ export const TaskCreation = () => {
                     />
                   </svg>
                 </div>
-                <span>Descrizione</span>
+                <span>Description</span>
               </label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl resize-none outline-none focus:border-purple-500 focus:bg-white transition-all duration-200 text-gray-700 placeholder:text-gray-400"
                 rows={6}
-                placeholder="Aggiungi una descrizione dettagliata del task..."
               />
             </div>
 
@@ -134,7 +126,7 @@ export const TaskCreation = () => {
                     />
                   </svg>
                 </div>
-                <span>Priorità</span>
+                <span>Priority</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {priorityConfig.map((config) => (
@@ -163,28 +155,15 @@ export const TaskCreation = () => {
               onClick={handleBack}
               className="px-6 py-2.5 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition-colors cursor-pointer"
             >
-              Annulla
+              Cancel
             </button>
             <button
               onClick={saveTask}
               disabled={isCreateButtonDisabled}
-              title={isCreateButtonDisabled ? "Aggiungi titolo" : "Crea task"}
+              title={isCreateButtonDisabled ? "Add title" : "Create task"}
               className="px-6 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-600 hover:to-purple-700 shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none flex items-center gap-2"
             >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-              Crea Task
+              Create
             </button>
           </div>
         </div>

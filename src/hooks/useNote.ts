@@ -9,12 +9,18 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { db } from "../configuration";
 import type { NoteItem } from "../types";
+import { useAuth } from "./useAuth";
 
-export const useNote = (userId: string | null) => {
+export const useNote = () => {
   const [notes, setNotes] = useState<NoteItem[]>([]);
+  const { user } = useAuth();
+
+  const userId = useMemo(() => {
+    return user?.uid;
+  }, [user?.uid]);
 
   useEffect(() => {
     if (!userId) {

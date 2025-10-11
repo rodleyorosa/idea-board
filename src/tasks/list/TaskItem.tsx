@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTask } from "../hooks/useTask";
-import type { TaskItemType } from "../types";
-import { getPriorityConfig, getStatusColor } from "../utils";
+import { useTask } from "../../hooks/useTask";
+import type { TaskItemType } from "../../types";
+import { getPriorityConfig, getStatusColor } from "../../utils";
 
 interface TaskItemProps {
   task: TaskItemType;

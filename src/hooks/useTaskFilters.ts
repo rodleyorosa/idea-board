@@ -1,4 +1,3 @@
-// src/hooks/useTaskFilters.ts
 import { useMemo } from "react";
 import type { TaskItemType, TaskPriority, TaskStatus } from "../types";
 import { useLocalStorage } from "./useLocalStorage";
@@ -67,7 +66,7 @@ export function useTaskFilters(tasks: TaskItemType[]) {
           return aTime - bTime;
         }
         case "priority": {
-          const priorityOrder = { alta: 0, media: 1, bassa: 2 };
+          const priorityOrder = { high: 0, medium: 1, low: 2 };
           return priorityOrder[a.priority] - priorityOrder[b.priority];
         }
         case "status": {

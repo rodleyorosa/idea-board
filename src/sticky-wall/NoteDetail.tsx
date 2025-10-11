@@ -1,9 +1,10 @@
-// src/sticky-wall/NoteDetail.tsx
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowBack } from "../assets/ArrowBack";
+import { ClockIcon } from "../assets/icons/ClockIcon";
+import { DeleteIconButton } from "../assets/icons/sticky-wall/DeleteIconButton";
+import { EditIconButton } from "../assets/icons/sticky-wall/EditIconButton";
 import { colors } from "../constants";
-import { useAuth } from "../hooks/useAuth";
 import { useNote } from "../hooks/useNote";
 import { MainContentWrapper } from "../MainContentWrapper";
 import type { NoteColor, NoteItem } from "../types";
@@ -12,8 +13,7 @@ import { formatTimestamp } from "../utils/dateUtils";
 export const NoteDetail = () => {
   const { noteId } = useParams<{ noteId: string }>();
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const { notes, editNote, deleteNote } = useNote(user?.uid || null);
+  const { notes, editNote, deleteNote } = useNote();
 
   const [note, setNote] = useState<NoteItem | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -23,7 +23,7 @@ export const NoteDetail = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   useEffect(() => {
-    const foundNote = notes.find((n) => n.id === noteId);
+    const foundNote = notes.find((note) => note.id === noteId);
     if (foundNote) {
       setNote(foundNote);
       setTitle(foundNote.title);
@@ -76,34 +76,19 @@ export const NoteDetail = () => {
 
   if (!note) {
     return (
-      <MainContentWrapper title="Nota non trovata" className="lg:w-2/3">
+      <MainContentWrapper title="Note not found" className="lg:w-2/3">
         <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg
-              className="w-8 h-8 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">
-            Nota non trovata
+            Note not found
           </h2>
           <p className="text-gray-600 mb-6">
-            La nota che stai cercando non esiste o è stata eliminata.
+            The note you are looking for does not exist or has been deleted.
           </p>
           <button
             onClick={handleBack}
             className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition-colors cursor-pointer"
           >
-            Torna alle note
+            Go back to notes
           </button>
         </div>
       </MainContentWrapper>
@@ -112,7 +97,7 @@ export const NoteDetail = () => {
 
   return (
     <MainContentWrapper
-      title="Dettaglio Nota"
+      title="Note Details"
       className="lg:w-2/3"
       fullscreenMobile
     >
@@ -131,58 +116,21 @@ export const NoteDetail = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="flex-1 px-3 py-2 bg-white/70 border-2 border-gray-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition-all duration-200 text-gray-800 text-lg font-bold min-w-0"
-                placeholder="Titolo..."
+                placeholder="Title..."
               />
             ) : (
               <h2 className="text-lg sm:text-xl font-bold text-gray-800 truncate flex-1 min-w-0">
-                {note.title || "Senza titolo"}
+                {note.title || "No title"}
               </h2>
             )}
           </div>
 
           <div className="flex items-center gap-2 flex-shrink-0">
-            {!isEditing && (
-              <button
-                onClick={handleEdit}
-                className="flex items-center justify-center w-10 h-10 bg-white/50 hover:bg-white/70 rounded-lg transition-colors cursor-pointer"
-              >
-                <svg
-                  className="w-4 h-4 text-gray-700"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                  />
-                </svg>
-              </button>
-            )}
-            <button
+            {!isEditing && <EditIconButton onClick={handleEdit} />}
+            <DeleteIconButton
               onClick={handleDelete}
-              className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors cursor-pointer ${
-                showDeleteConfirm
-                  ? "bg-red-600 hover:bg-red-700 text-white"
-                  : "bg-white/50 hover:bg-white/70 text-gray-700"
-              }`}
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                />
-              </svg>
-            </button>
+              showDeleteConfirm={showDeleteConfirm}
+            />
           </div>
         </div>
 
@@ -192,11 +140,11 @@ export const NoteDetail = () => {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               className="w-full px-4 py-3 bg-white/70 border-2 border-gray-300 rounded-xl resize-none outline-none focus:border-blue-500 focus:bg-white transition-all duration-200 text-gray-700 text-base leading-relaxed min-h-[300px]"
-              placeholder="Contenuto..."
+              placeholder="Content..."
             />
           ) : (
             <div className="text-gray-700 text-base leading-relaxed whitespace-pre-wrap">
-              {note.content || "Nessun contenuto"}
+              {note.content || "No content"}
             </div>
           )}
         </div>
@@ -206,7 +154,7 @@ export const NoteDetail = () => {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <span className="text-sm font-medium text-gray-700">
-                  Colore:
+                  Color:
                 </span>
                 <div className="flex gap-2">
                   {(Object.entries(colors) as [NoteColor, string][]).map(
@@ -227,22 +175,9 @@ export const NoteDetail = () => {
                 </div>
               </div>
 
-              {/* Bottoni azione */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs text-gray-500">
-                  <svg
-                    className="w-3.5 h-3.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+                  <ClockIcon />
                   <span>{formatTimestamp(note.createdAt)}</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -250,33 +185,21 @@ export const NoteDetail = () => {
                     onClick={handleCancelEdit}
                     className="px-5 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors cursor-pointer text-sm"
                   >
-                    Annulla
+                    Cancel
                   </button>
                   <button
                     onClick={handleSave}
                     disabled={!title.trim() && !content.trim()}
                     className="px-5 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none text-sm"
                   >
-                    Salva
+                    Save
                   </button>
                 </div>
               </div>
             </div>
           ) : (
             <div className="flex items-center gap-2 text-sm text-gray-600">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+              <ClockIcon />
               <span>{formatTimestamp(note.createdAt)}</span>
             </div>
           )}

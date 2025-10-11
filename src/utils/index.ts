@@ -5,13 +5,10 @@ export const getStatusColor = (status: string) => {
 
   switch (normalizedStatus) {
     case "done":
-    case "completato":
       return "bg-green-100 text-green-700 border-green-200";
     case "in progress":
-    case "in corso":
       return "bg-orange-100 text-orange-700 border-orange-200";
     case "open":
-    case "aperto":
       return "bg-gray-100 text-gray-700 border-gray-200";
     default:
       return "bg-blue-100 text-blue-700 border-blue-200";
@@ -53,27 +50,27 @@ export const getStatusTextColor = (configValue: TaskStatus, currentStatus: strin
 };
 
 export const getPriorityConfig = (priority: TaskPriority) => {
-  const normalizedPriority = (priority || "media").toLowerCase().trim();
+  const normalizedPriority = (priority || "high").toLowerCase().trim();
 
   switch (normalizedPriority) {
-    case "bassa":
+    case "low":
       return {
         color: "text-green-600 bg-white border-green-300",
         icon: "↓",
-        label: "Bassa",
+        label: "Low",
       };
-    case "alta":
+    case "high":
       return {
         color: "text-red-600 bg-white border-red-300",
         icon: "↑",
-        label: "Alta",
+        label: "High",
       };
-    case "media":
+    case "medium":
     default:
       return {
         color: "text-yellow-600 bg-white border-yellow-300",
         icon: "→",
-        label: "Media",
+        label: "Medium",
       };
   }
 };

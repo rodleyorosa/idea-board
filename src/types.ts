@@ -18,7 +18,7 @@ export type NoteItem = {
 };
 
 export type TaskStatus = "open" | "in-progress" | "done";
-export type TaskPriority = "bassa" | "media" | "alta";
+export type TaskPriority = "low" | "medium" | "high";
 
 export type TaskItemType = {
   id: string;
