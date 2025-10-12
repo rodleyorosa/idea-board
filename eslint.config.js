@@ -18,6 +18,12 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+    }
+  },
+  {
+    files: ['**/*.test.{ts,tsx}', '**/test-utils.tsx', '**/test/**/*'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
     },
   },
 ])
