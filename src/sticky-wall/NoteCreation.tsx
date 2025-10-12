@@ -1,28 +1,32 @@
-import { ChevronLeft } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { colors } from "../constants";
 import { useNote } from "../hooks/useNote";
+import { useNoteForm } from "../hooks/useNoteForm";
 import { MainContentWrapper } from "../MainContentWrapper";
-import type { NoteColor } from "../types";
+import { NoteContainer } from "./components/NoteContainer";
+import { NoteContent } from "./components/NoteContent";
+import { NoteFooter } from "./components/NoteFooter";
+import { NoteHeader } from "./components/NoteHeader";
 
 export const NoteCreation = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [color, setColor] = useState<NoteColor>("yellow");
-  const { addNote } = useNote();
   const navigate = useNavigate();
-
-  const isCreateButtonDisabled = useMemo(() => {
-    return !title.trim() && !content.trim();
-  }, [title, content]);
+  const { addNote } = useNote();
+  const {
+    title,
+    content,
+    color,
+    isSaveDisabled,
+    setTitle,
+    setContent,
+    setColor,
+  } = useNoteForm();
 
   const handleBack = useCallback(() => {
     navigate("/sticky-wall");
   }, [navigate]);
 
-  const saveNote = useCallback(async () => {
-    if (!title.trim() && !content.trim()) return;
+  const handleSave = useCallback(async () => {
+    if (isSaveDisabled) return;
 
     try {
       await addNote(title, content, color);
@@ -30,88 +34,29 @@ export const NoteCreation = () => {
     } catch (error) {
       console.error("Error creating note:", error);
     }
-  }, [addNote, color, content, navigate, title]);
+  }, [addNote, color, content, navigate, title, isSaveDisabled]);
 
   return (
-    <MainContentWrapper title="New Note" className="lg:w-2/3" fullscreenMobile>
-      <div
-        className={`${colors[color]} sm:rounded-2xl shadow-xl overflow-hidden flex flex-col min-h-[calc(100vh-8rem)] sm:min-h-[600px]`}
-      >
-        <div className="p-4 sm:p-6 flex items-center justify-between border-b border-gray-200/50 flex-shrink-0 gap-3">
-          <div className="flex items-center gap-3 flex-1 min-w-0">
-            <button
-              onClick={handleBack}
-              className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors cursor-pointer flex-shrink-0 hover:bg-white/30 text-gray-700"
-            >
-              <ChevronLeft className="w-5 h-5" strokeWidth={2} />
-            </button>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              maxLength={50}
-              title={title}
-              className="flex-1 px-3 py-2 bg-white/70 border-2 border-gray-300 rounded-lg outline-none focus:border-blue-500 focus:bg-white transition-all duration-200 text-gray-800 text-lg font-bold min-w-0"
-              placeholder="Title..."
-            />
-          </div>
-        </div>
-
-        <div className="p-6 sm:p-8 flex-1 overflow-y-auto">
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="w-full px-4 py-3 bg-white/70 border-2 border-gray-300 rounded-xl resize-none outline-none focus:border-blue-500 focus:bg-white transition-all duration-200 text-gray-700 text-base leading-relaxed min-h-[300px]"
-            placeholder="Content..."
-          />
-        </div>
-
-        <div className="p-6 bg-white/30 backdrop-blur-sm border-t border-gray-200/50 flex-shrink-0">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-gray-700">Color:</span>
-              <div className="flex gap-2">
-                {(Object.entries(colors) as [NoteColor, string][]).map(
-                  ([colorName, colorClass]) => (
-                    <button
-                      key={colorName}
-                      type="button"
-                      onClick={() => setColor(colorName)}
-                      className={`w-8 h-8 rounded-full ${colorClass} border-2 transition-transform hover:scale-110 cursor-pointer ${
-                        color === colorName
-                          ? "border-slate-800 scale-110"
-                          : "border-slate-300"
-                      }`}
-                      title={colorName}
-                    />
-                  )
-                )}
-              </div>
-            </div>
-
-            <div className="flex items-center justify-end gap-3">
-              <button
-                onClick={handleBack}
-                className="px-5 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors cursor-pointer text-sm"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={saveNote}
-                disabled={isCreateButtonDisabled}
-                title={
-                  isCreateButtonDisabled
-                    ? "Add title or content"
-                    : "Create note"
-                }
-                className="px-5 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none text-sm"
-              >
-                Create
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <MainContentWrapper title="New Note" className="lg:w-2/3">
+      <NoteContainer color={color}>
+        <NoteHeader
+          title={title}
+          isEditing
+          onBack={handleBack}
+          onTitleChange={setTitle}
+        />
+        <NoteContent content={content} isEditing onChange={setContent} />
+        <NoteFooter
+          isEditing
+          color={color}
+          isSaveDisabled={isSaveDisabled}
+          onColorChange={setColor}
+          onCancel={handleBack}
+          onSave={handleSave}
+          saveButtonText="Create"
+          cancelButtonText="Cancel"
+        />
+      </NoteContainer>
     </MainContentWrapper>
   );
 };

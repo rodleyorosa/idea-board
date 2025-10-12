@@ -3,5 +3,4 @@
 
 echo 'Commit completato con successo!'
 
-npm run build
-npm run deploy
+npm run release

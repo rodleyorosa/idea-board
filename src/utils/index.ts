@@ -15,7 +15,10 @@ export const getStatusColor = (status: string) => {
   }
 };
 
-export const getStatusIconColor = (configValue: TaskStatus, currentStatus: string) => {
+export const getStatusIconColor = (
+  configValue: TaskStatus,
+  currentStatus: string
+) => {
   const isActive = currentStatus === configValue;
 
   switch (configValue) {
@@ -34,7 +37,10 @@ export const getStatusIconColor = (configValue: TaskStatus, currentStatus: strin
   }
 };
 
-export const getStatusTextColor = (configValue: TaskStatus, currentStatus: string) => {
+export const getStatusTextColor = (
+  configValue: TaskStatus,
+  currentStatus: string
+) => {
   const isActive = currentStatus === configValue;
 
   switch (configValue) {
@@ -73,4 +79,19 @@ export const getPriorityConfig = (priority: TaskPriority) => {
         label: "Medium",
       };
   }
+};
+
+export const getAuthErrorMessage = (errorCode: string): string => {
+  const errorMessages: Record<string, string> = {
+    "auth/user-not-found": "User not found",
+    "auth/wrong-password": "Incorrect password",
+    "auth/invalid-email": "Invalid email address",
+    "auth/user-disabled": "Account disabled",
+    "auth/popup-closed-by-user": "Login cancelled",
+    "auth/invalid-credential": "Invalid credentials",
+    "auth/email-already-in-use": "Email is already registered",
+    "auth/weak-password": "Password is too weak",
+  };
+
+  return errorMessages[errorCode] || "An error occurred during authentication";
 };
