@@ -124,7 +124,7 @@ export const KanbanBoard = () => {
               className={`flex-1 ${
                 column.color
               } rounded-b-xl border-2 border-t-0 p-4 min-h-[500px] max-h-[calc(100vh-300px)] overflow-y-auto transition-all duration-200 ${
-                isDraggedOver ? "ring-2 ring-indigo-400 ring-offset-1" : ""
+                isDraggedOver && "ring-2 ring-indigo-400 ring-offset-1"
               }`}
               onDragOver={(e) => handleDragOver(e, column.id)}
               onDragLeave={handleDragLeave}
@@ -151,7 +151,7 @@ export const KanbanBoard = () => {
                         onDragEnd={handleDragEnd}
                         onClick={() => openTaskDetail(task.id)}
                         className={`bg-white rounded-lg p-4 shadow-sm border-2 border-gray-200 hover:border-indigo-300 hover:shadow-md transition-all duration-200 cursor-grab active:cursor-grabbing select-none group ${
-                          isDragging ? "opacity-40 scale-98" : ""
+                          isDragging && "opacity-40 scale-98"
                         }`}
                       >
                         <div className="flex items-start justify-between gap-2 mb-2">

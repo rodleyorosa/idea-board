@@ -11,7 +11,7 @@ export function ColorPicker({
   onColorChange,
 }: ColorPickerProps) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center flex-start gap-3 w-full">
       <span className="text-sm font-medium text-gray-700">Color:</span>
       <div className="flex gap-2">
         {(Object.entries(colors) as [NoteColor, string][]).map(

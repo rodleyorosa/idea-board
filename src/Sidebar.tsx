@@ -138,7 +138,7 @@ export const Sidebar = () => {
                         </div>
                         <span
                           className={`font-medium ${
-                            isActive ? "font-semibold" : ""
+                            isActive && "font-semibold"
                           }`}
                         >
                           {item.title}

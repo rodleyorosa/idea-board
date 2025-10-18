@@ -105,12 +105,12 @@ export function TaskHeader({
         <div className="flex items-center gap-3">
           <button
             onClick={onBack}
-            className="sm:hidden flex items-center justify-center w-10 h-10 text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer flex-shrink-0"
+            className="flex items-center justify-center w-10 h-10 text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer flex-shrink-0"
           >
             <ChevronLeft className="w-5 h-5" strokeWidth={2} />
           </button>
 
-          <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm flex-shrink-0">
+          <div className="hidden sm:flex w-10 h-10 bg-white/20 rounded-lg items-center justify-center backdrop-blur-sm flex-shrink-0">
             <ClipboardList className="w-6 h-6 text-white" />
           </div>
 
