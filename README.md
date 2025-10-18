@@ -1,69 +1,52 @@
-# React + TypeScript + Vite
+# Idea Board
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, intuitive web application for managing notes and tasks, built with React, TypeScript, and Firebase.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**[Try Idea Board](https://rodleyorosa.github.io/idea-board)**
 
-## Expanding the ESLint configuration
+Experience the app in action! Create an account or explore the features to see how Idea Board can help organize your notes and tasks.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✨ Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🎨 Sticky Wall
+- Create colorful sticky notes with customizable colors
+- Edit and delete notes with ease
+- Visual grid layout for quick browsing
+- Six color themes: Yellow, Rose, Sky, Emerald, Violet, and Amber
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### ✅ Task Management
+- Create tasks with priorities (Low, Medium, High)
+- Track task status (Open, In Progress, Done)
+- Two viewing modes:
+  - **List View**: Traditional list with filtering and sorting
+  - **Kanban Board**: Drag-and-drop interface for visual task management
+- Advanced filtering by priority and status
+- Sort by date or importance
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 🔐 Authentication
+- Secure email/password authentication via Firebase
+- User registration with display name
+- Protected routes and user-specific data
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 📱 Responsive Design
+- Mobile-first approach
+- Collapsible sidebar navigation
+- Touch-friendly interface
+- Optimized for all screen sizes
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Tech Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Frontend**: React 19, TypeScript
+- **Styling**: Tailwind CSS 4
+- **Backend**: Firebase (Authentication & Firestore)
+- **Routing**: React Router v7
+- **Icons**: Lucide React
+- **Build Tool**: Vite
+- **Testing**: Vitest, React Testing Library
+- **Linting**: ESLint with TypeScript support
+
+## 💡 Support
+
+Have ideas for new features or found a bug? Feel free to [open an issue](https://github.com/rodleyorosa/idea-board/issues) on GitHub.
