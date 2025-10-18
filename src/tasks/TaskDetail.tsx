@@ -92,7 +92,11 @@ export const TaskDetail = () => {
   }
 
   return (
-    <MainContentWrapper title="Task Details" className="lg:w-2/3">
+    <MainContentWrapper
+      title="Task Details"
+      className="lg:w-2/3"
+      fullscreenMobile
+    >
       <div className="bg-white sm:rounded-2xl shadow-xl overflow-hidden flex flex-col">
         <TaskHeader
           title="Task Details"

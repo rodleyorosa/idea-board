@@ -37,7 +37,7 @@ export const NoteCreation = () => {
   }, [addNote, color, content, navigate, title, isSaveDisabled]);
 
   return (
-    <MainContentWrapper title="New Note" className="lg:w-2/3">
+    <MainContentWrapper title="New Note" className="lg:w-2/3" fullscreenMobile>
       <NoteContainer color={color}>
         <NoteHeader
           title={title}

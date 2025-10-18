@@ -40,7 +40,7 @@ export const TaskCreation = () => {
   }, [addTask, description, navigate, priority, title, isSaveDisabled]);
 
   return (
-    <MainContentWrapper title="New Task" className="lg:w-2/3">
+    <MainContentWrapper title="New Task" className="lg:w-2/3" fullscreenMobile>
       <div className="bg-white sm:rounded-2xl shadow-xl overflow-hidden flex flex-col">
         <TaskHeader
           title="New Task"

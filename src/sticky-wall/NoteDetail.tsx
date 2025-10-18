@@ -100,7 +100,11 @@ export const NoteDetail = () => {
   }
 
   return (
-    <MainContentWrapper title="Note Details" className="lg:w-2/3">
+    <MainContentWrapper
+      title="Note Details"
+      className="lg:w-2/3"
+      fullscreenMobile
+    >
       <NoteContainer color={color}>
         <NoteHeader
           title={title}
