@@ -1,4 +1,4 @@
-import { ChevronLeft, ClipboardList, Pencil, Trash2 } from "lucide-react";
+import { ChevronLeft, Pencil, Trash2 } from "lucide-react";
 import type { TaskItemType } from "../../types";
 
 interface TaskHeaderProps {
@@ -16,8 +16,8 @@ interface TaskHeaderProps {
 }
 
 export function TaskHeader({
-  title = "New Task",
-  subtitle = "Create a new task",
+  title,
+  subtitle,
   isEditing = false,
   showDeleteConfirm = false,
   status,
@@ -63,43 +63,6 @@ export function TaskHeader({
 
   return (
     <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
-      {/* Desktop: Back and Actions Row */}
-      {(onEdit || onDelete) && (
-        <div className="hidden sm:flex items-center justify-between mb-4">
-          <button
-            onClick={onBack}
-            className="flex items-center gap-2 text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-colors cursor-pointer"
-          >
-            <ChevronLeft className="w-5 h-5" />
-            <span>Go back</span>
-          </button>
-          <div className="flex items-center gap-2">
-            {!isEditing && onEdit && (
-              <button
-                onClick={onEdit}
-                className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors cursor-pointer"
-              >
-                <Pencil className="w-4 h-4" />
-                <span>Edit</span>
-              </button>
-            )}
-            {onDelete && (
-              <button
-                onClick={onDelete}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors cursor-pointer ${
-                  showDeleteConfirm
-                    ? "bg-red-600 hover:bg-red-700 text-white"
-                    : "bg-white/10 hover:bg-white/20 text-white"
-                }`}
-              >
-                <Trash2 className="w-4 h-4" />
-                <span>{showDeleteConfirm ? "Confirm" : "Delete"}</span>
-              </button>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* Title and Status Row */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -109,10 +72,6 @@ export function TaskHeader({
           >
             <ChevronLeft className="w-5 h-5" strokeWidth={2} />
           </button>
-
-          <div className="hidden sm:flex w-10 h-10 bg-white/20 rounded-lg items-center justify-center backdrop-blur-sm flex-shrink-0">
-            <ClipboardList className="w-6 h-6 text-white" />
-          </div>
 
           <div>
             <span className="text-white font-bold text-xl">{title}</span>
@@ -187,6 +146,34 @@ export function TaskHeader({
             )}
           </div>
         </div>
+        {(onEdit || onDelete) && (
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              {!isEditing && onEdit && (
+                <button
+                  onClick={onEdit}
+                  className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Pencil className="w-4 h-4" />
+                  <span>Edit</span>
+                </button>
+              )}
+              {onDelete && (
+                <button
+                  onClick={onDelete}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors cursor-pointer ${
+                    showDeleteConfirm
+                      ? "bg-red-600 hover:bg-red-700 text-white"
+                      : "bg-white/10 hover:bg-white/20 text-white"
+                  }`}
+                >
+                  <Trash2 className="w-4 h-4" />
+                  <span>{showDeleteConfirm ? "Confirm" : "Delete"}</span>
+                </button>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Mobile: Action Buttons */}
         {(onEdit || onDelete) && (
@@ -197,6 +184,7 @@ export function TaskHeader({
                 className="flex items-center justify-center w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors cursor-pointer"
               >
                 <Pencil className="w-4 h-4" />
+                <span>Edit</span>
               </button>
             )}
             {onDelete && (
@@ -209,6 +197,7 @@ export function TaskHeader({
                 }`}
               >
                 <Trash2 className="w-4 h-4" />
+                <span>{showDeleteConfirm ? "Confirm" : "Delete"}</span>
               </button>
             )}
           </div>

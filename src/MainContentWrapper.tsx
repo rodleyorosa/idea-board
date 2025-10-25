@@ -23,7 +23,7 @@ export const MainContentWrapper = ({
       } ${className}`}
     >
       <div
-        className={`flex items-center gap-3 ${fullscreenMobile && "pt-6 pl-6"}`}
+        className={`flex items-center gap-3 ${fullscreenMobile && "pt-6 sm:pt-0 pl-6 sm:pl-0"}`}
       >
         <button onClick={openSidebar} className="cursor-pointer lg:hidden">
           <Menu className="w-[30px] h-[30px]" strokeWidth={2} />
