@@ -27,10 +27,6 @@ export default function Signup() {
       setError("Password must be at least 6 characters long");
       return false;
     }
-    if (!name.trim()) {
-      setError("Please enter your name");
-      return false;
-    }
     return true;
   };
 
