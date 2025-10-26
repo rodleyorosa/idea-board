@@ -1,30 +1,15 @@
 import { useCallback, useMemo, useState } from "react";
+import { DEFAULT_COLOR } from "../constants";
 import type { NoteColor, NoteItem } from "../types";
 
-interface UseNoteFormProps {
-  initialTitle?: string;
-  initialContent?: string;
-  initialColor?: NoteColor;
-}
-
-export function useNoteForm({
-  initialTitle = "",
-  initialContent = "",
-  initialColor = "yellow" as NoteColor,
-}: UseNoteFormProps = {}) {
-  const [title, setTitle] = useState(initialTitle);
-  const [content, setContent] = useState(initialContent);
-  const [color, setColor] = useState<NoteColor>(initialColor);
+export function useNoteForm() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [color, setColor] = useState<NoteColor>(DEFAULT_COLOR);
 
   const isSaveDisabled = useMemo(() => {
     return !title.trim() && !content.trim();
   }, [title, content]);
-
-  const resetForm = useCallback(() => {
-    setTitle(initialTitle);
-    setContent(initialContent);
-    setColor(initialColor);
-  }, [initialTitle, initialContent, initialColor]);
 
   const updateFromNote = useCallback((note: NoteItem) => {
     setTitle(note.title);
@@ -40,7 +25,6 @@ export function useNoteForm({
     setTitle,
     setContent,
     setColor,
-    resetForm,
     updateFromNote,
   };
 }

@@ -1,4 +1,4 @@
-import type { NoteColor, TaskPriority } from "../types";
+import type { NoteColor, TaskPriority, TaskStatus } from "../types";
 
 export const colors: Record<NoteColor, string> = {
   yellow: "bg-yellow-100",
@@ -8,6 +8,12 @@ export const colors: Record<NoteColor, string> = {
   violet: "bg-violet-100",
   amber: "bg-amber-100",
 };
+
+export const DEFAULT_COLOR = colors["yellow"] as NoteColor;
+
+export const DEFAULT_PRIORITY = "medium" as TaskPriority;
+
+export const DEFAULT_STATUS = "open" as TaskStatus;
 
 export const priorityConfig: Array<{
   value: TaskPriority;
